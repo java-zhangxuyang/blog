@@ -1,0 +1,80 @@
+spring:
+  profiles:
+    active: local
+#mybatis配置
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true  #按驼峰命名规则自动匹配到实体类上,不需要用别名
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.zhangxy.model
+
+---
+spring:
+   profiles: local
+   mvc:
+     favicon:
+        enabled: true   #网站默认图标
+   datasource:          #数据源
+     url: jdbc:mysql://www.zhangxy.cc:3306/blog?useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=UTF-8
+     username: root
+     password: devroot
+     driver-class-name: com.mysql.cj.jdbc.Driver
+     type: com.alibaba.druid.pool.DruidDataSource
+     dbcp2:
+        test-on-borrow: true
+        test-while-idle: true
+        time-between-eviction-runs-millis: 3600000
+        min-evictable-idle-time-millis: 300000
+        remove-abandoned-on-borrow: true
+        remove-abandoned-timeout: 1800
+        max-wait-millis: 60000
+        initial-size: 5
+        min-idle: 5
+        max-idle: 20
+        max-total: 20
+server:
+  port: 80
+logging:
+  file: log/site.log
+
+---
+spring:
+   profiles: prod
+   mvc:
+       favicon:
+         enabled: false
+   datasource:
+       type: com.alibaba.druid.pool.DruidDataSource
+       driverClassName: com.mysql.jdbc.Driver
+       url: jdbc:mysql://www.zhangxy.cc:3306/blog?useUnicode=true&characterEncoding=utf8
+       username: root
+       password: devroot
+       initialSize: 1
+       minIdle: 3
+       maxActive: 20
+       # 配置获取连接等待超时的时间
+       maxWait: 60000
+       # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+       timeBetweenEvictionRunsMillis: 60000
+       # 配置一个连接在池中最小生存的时间，单位是毫秒
+       minEvictableIdleTimeMillis: 30000
+       validationQuery: select 'x'
+       testWhileIdle: true
+       testOnBorrow: false
+       testOnReturn: false
+
+server:
+  port: 80
+#  ssl:
+#    key-store: classpath:ssl/1534728933823.pfx
+#    key-store-password: 1534728933823
+#    key-store-type: PKCS12
+logging:
+  file: /opt/blog/log/site.log
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+  returnPageInfo: check

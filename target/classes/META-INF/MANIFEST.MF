@@ -1,0 +1,52 @@
+Manifest-Version: 1.0
+Implementation-Title: site_blog
+Implementation-Version: 1.0
+Built-By: zxy99
+Implementation-Vendor-Id: com.yaa.site
+Class-Path: ../lib/spring-boot-starter-jdbc-2.0.3.RELEASE.jar ../lib/s
+ pring-boot-starter-2.0.3.RELEASE.jar ../lib/spring-boot-starter-loggi
+ ng-2.0.3.RELEASE.jar ../lib/logback-classic-1.2.3.jar ../lib/logback-
+ core-1.2.3.jar ../lib/log4j-to-slf4j-2.10.0.jar ../lib/log4j-api-2.10
+ .0.jar ../lib/jul-to-slf4j-1.7.25.jar ../lib/javax.annotation-api-1.3
+ .2.jar ../lib/snakeyaml-1.19.jar ../lib/HikariCP-2.7.9.jar ../lib/slf
+ 4j-api-1.7.25.jar ../lib/spring-jdbc-5.0.7.RELEASE.jar ../lib/spring-
+ beans-5.0.7.RELEASE.jar ../lib/spring-tx-5.0.7.RELEASE.jar ../lib/spr
+ ing-boot-starter-web-2.0.3.RELEASE.jar ../lib/spring-boot-starter-jso
+ n-2.0.3.RELEASE.jar ../lib/jackson-databind-2.9.6.jar ../lib/jackson-
+ annotations-2.9.0.jar ../lib/jackson-core-2.9.6.jar ../lib/jackson-da
+ tatype-jdk8-2.9.6.jar ../lib/jackson-datatype-jsr310-2.9.6.jar ../lib
+ /jackson-module-parameter-names-2.9.6.jar ../lib/spring-boot-starter-
+ tomcat-2.0.3.RELEASE.jar ../lib/tomcat-embed-core-8.5.31.jar ../lib/t
+ omcat-embed-el-8.5.31.jar ../lib/tomcat-embed-websocket-8.5.31.jar ..
+ /lib/hibernate-validator-6.0.10.Final.jar ../lib/validation-api-2.0.1
+ .Final.jar ../lib/jboss-logging-3.3.2.Final.jar ../lib/classmate-1.3.
+ 4.jar ../lib/spring-web-5.0.7.RELEASE.jar ../lib/spring-webmvc-5.0.7.
+ RELEASE.jar ../lib/spring-context-5.0.7.RELEASE.jar ../lib/spring-exp
+ ression-5.0.7.RELEASE.jar ../lib/mybatis-spring-boot-starter-1.3.2.ja
+ r ../lib/mybatis-spring-boot-autoconfigure-1.3.2.jar ../lib/mybatis-3
+ .4.6.jar ../lib/mybatis-spring-1.3.2.jar ../lib/mysql-connector-java-
+ 8.0.16.jar ../lib/protobuf-java-3.6.1.jar ../lib/spring-boot-starter-
+ thymeleaf-2.0.3.RELEASE.jar ../lib/thymeleaf-spring5-3.0.9.RELEASE.ja
+ r ../lib/thymeleaf-3.0.9.RELEASE.jar ../lib/attoparser-2.0.4.RELEASE.
+ jar ../lib/unbescape-1.1.5.RELEASE.jar ../lib/thymeleaf-extras-java8t
+ ime-3.0.1.RELEASE.jar ../lib/spring-core-5.0.7.RELEASE.jar ../lib/spr
+ ing-jcl-5.0.7.RELEASE.jar ../lib/jodd-core-3.6.7.jar ../lib/jodd-mail
+ -3.6.7.jar ../lib/activation-1.1.1.jar ../lib/mail-1.4.5.jar ../lib/m
+ ybatis-generator-core-1.3.2.jar ../lib/commons-lang3-3.7.jar ../lib/b
+ eetl-2.9.3.jar ../lib/antlr4-runtime-4.2.jar ../lib/org.abego.treelay
+ out.core-1.0.1.jar ../lib/antlr4-annotations-4.2.jar ../lib/spring-bo
+ ot-devtools-2.0.3.RELEASE.jar ../lib/spring-boot-2.0.3.RELEASE.jar ..
+ /lib/spring-boot-autoconfigure-2.0.3.RELEASE.jar ../lib/spring-boot-s
+ tarter-aop-2.0.3.RELEASE.jar ../lib/spring-aop-5.0.7.RELEASE.jar ../l
+ ib/aspectjweaver-1.8.13.jar ../lib/fastjson-1.2.31.jar ../lib/druid-1
+ .0.18.jar ../lib/pagehelper-spring-boot-starter-1.2.3.jar ../lib/page
+ helper-spring-boot-autoconfigure-1.2.3.jar ../lib/pagehelper-5.1.2.ja
+ r ../lib/jsqlparser-1.0.jar ../lib/emoji-java-3.2.0.jar ../lib/json-2
+ 0140107.jar ../lib/commonmark-0.9.0.jar ../lib/commonmark-ext-gfm-tab
+ les-0.9.0.jar ../lib/rome-1.0.jar ../lib/jdom-1.0.jar
+Build-Jdk: 1.8.0_211
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/site_blog
+Created-By: Maven Integration for Eclipse
+Main-Class: com.zhangxy.BlogApplication
+

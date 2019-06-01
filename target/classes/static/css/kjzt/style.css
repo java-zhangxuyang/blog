@@ -1,0 +1,14 @@
+@charset "utf-8";
+
+@font-face {
+    font-family: 'lcd';
+    src: url('./ds-digi.ttf');
+}
+
+.screen-time {
+    font-family: 'lcd';
+    font-size: 20px;
+    color: #60B7ff;
+    text-align: right;
+    padding-top: 50px;
+}
