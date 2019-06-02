@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.beetl.core.resource.WebAppResourceLoader;
 import org.beetl.ext.spring.BeetlGroupUtilConfiguration;
 import org.beetl.ext.spring.BeetlSpringViewResolver;
+import org.beetl.sql.ext.spring4.BeetlSqlScannerConfigurer;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
@@ -54,5 +55,5 @@ public class BlogApplication {
         beetlSpringViewResolver.setConfig(beetlGroupUtilConfiguration);
         return beetlSpringViewResolver;
     }
-
+    
 }

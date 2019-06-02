@@ -94,9 +94,19 @@
          <!-- beetl -->
         <dependency>
 	        <groupId>com.ibeetl</groupId>
+	        <artifactId>beetl-framework-starter</artifactId>
+	        <version>1.1.35.RELEASE</version>
+	    </dependency>
+	    <dependency>
+	        <groupId>com.ibeetl</groupId>
+	        <artifactId>beetlsql</artifactId>
+	        <version>2.10.10</version>
+	    </dependency>
+       <!--  <dependency>
+	        <groupId>com.ibeetl</groupId>
 	        <artifactId>beetl</artifactId>
 	        <version>2.9.3</version>
-		</dependency>
+		</dependency> -->
 		<!--热部署-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -122,7 +132,7 @@
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid</artifactId>
-			<version>1.0.18</version>
+			<version>1.1.9</version>
 		</dependency>
 		<!--&lt;!&ndash; 分页插件 &ndash;&gt;-->
 		<dependency>

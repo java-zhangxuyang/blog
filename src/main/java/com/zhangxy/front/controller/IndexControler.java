@@ -41,6 +41,7 @@ public class IndexControler {
 		model.addAttribute("tagList", tagList);
 		List<Navigation> navList = navService.getNavigationList();
 		model.addAttribute("navList", navList);
+		model.addAttribute("title", "young博客");
 		return "front/index";
 	}
 	
