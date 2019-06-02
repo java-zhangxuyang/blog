@@ -1,19 +1,15 @@
-spring:
-  profiles:
-    active: local
-#mybatis配置
-mybatis:
-  configuration:
-    map-underscore-to-camel-case: true  #按驼峰命名规则自动匹配到实体类上,不需要用别名
-  mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.zhangxy.model
+server:
+  port: 80
 
----
 spring:
-   profiles: local
    mvc:
+     static-path-pattern: /**
      favicon:
         enabled: true   #网站默认图标
+   thymeleaf:
+          prefix: classpath:/templates/
+          suffix: .html
+          cache: false #关闭缓存
    datasource:          #数据源
      url: jdbc:mysql://www.zhangxy.cc:3306/blog?useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=UTF-8
      username: root
@@ -32,46 +28,16 @@ spring:
         min-idle: 5
         max-idle: 20
         max-total: 20
-server:
-  port: 80
 logging:
   file: log/site.log
 
----
-spring:
-   profiles: prod
-   mvc:
-       favicon:
-         enabled: false
-   datasource:
-       type: com.alibaba.druid.pool.DruidDataSource
-       driverClassName: com.mysql.jdbc.Driver
-       url: jdbc:mysql://www.zhangxy.cc:3306/blog?useUnicode=true&characterEncoding=utf8
-       username: root
-       password: devroot
-       initialSize: 1
-       minIdle: 3
-       maxActive: 20
-       # 配置获取连接等待超时的时间
-       maxWait: 60000
-       # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
-       timeBetweenEvictionRunsMillis: 60000
-       # 配置一个连接在池中最小生存的时间，单位是毫秒
-       minEvictableIdleTimeMillis: 30000
-       validationQuery: select 'x'
-       testWhileIdle: true
-       testOnBorrow: false
-       testOnReturn: false
-
-server:
-  port: 80
-#  ssl:
-#    key-store: classpath:ssl/1534728933823.pfx
-#    key-store-password: 1534728933823
-#    key-store-type: PKCS12
-logging:
-  file: /opt/blog/log/site.log
-
+  
+#mybatis配置
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true  #按驼峰命名规则自动匹配到实体类上,不需要用别名
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.zhangxy.model
 pagehelper:
   helperDialect: mysql
   reasonable: true

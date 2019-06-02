@@ -162,7 +162,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>Young-Blog</finalName>
+		<finalName>young-Blog</finalName>
 		<plugins>
 			<!--打包Jar-->
 			<plugin>
