@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="/js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/bootstrap/js//bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/js/front/index.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="/css/front/general.css"/>
+<link rel="stylesheet" href="/css/front/index.css"/>
+<link rel="stylesheet" href="/css/kjzt/style.css"/>
+
+<title>欢迎来到Young微博</title>
+</head>
+<body>
+	<div><!-- 整体div -->
+		<div class="banner"><!-- 导航栏 -->
+			<div class = "logo col-md-2">
+				<img alt="LOGO" src="/image/logo.jpg">
+			</div>
+			<div class = "navig col-md-8">
+				<ul class="nav nav-tabs">
+				  <%for(nav in navList){%>
+				  	<%if(navLP.index == 1){%>
+					  <li class="active"><a href="${nav.url}">${nav.name}</a></li>
+				  	<%}else{%>
+					  <li><a href="${nav.url}">${nav.name}</a></li>
+				  	<%}%>
+				  <%}%>
+				</ul>
+			</div>
+		    <div onload="show()" id = "show_time" class="screen-time col-md-2">
+			    <script>
+			    	setInterval("show_time.innerHTML=new Date().toLocaleString()+' 星期'+'日一二三四五六'.charAt(new Date().getDay());",1000);
+				</script>
+		    </div>
+		</div>
+		<div class="content">
+			<div class="left col-md-8"><!-- 内容体 -->
+				<%for(con in conList.list){%>
+					<div>
+						${con.title}
+					</div>
+				<%}%>
+			</div>
+			<div class="right col-md-4"><!-- 右边 -->
+				<div><!-- 右上 -->
+				
+				</div>
+				<div><!-- 右下 -->
+				
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
