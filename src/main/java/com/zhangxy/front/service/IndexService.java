@@ -31,13 +31,16 @@ public class IndexService {
 	/**
 	  * 获取文章列表  （分页）
 	 * @param pageNum 页数
+	 * @param pageNum 
 	 * @return
 	 */
-	public PageInfo<Content> getContentList(Integer pageNum){
+	public PageInfo<Content> getContentList(Integer nid, Integer pageNum){
 		pageNum = pageNum == null ? 1 :pageNum;
+		nid = nid == null ? 1 : nid;
 		PageHelper.startPage(pageNum, 10);
 		ContentExample example = new ContentExample();
 		example.setOrderByClause(" top desc, time desc");
+		example.createCriteria().andNidEqualTo(nid);
 		List<Content> list = contentMapper.selectByExample(example);
 		PageInfo<Content> pageInfo = new PageInfo<>(list);
 		List<Content> resule = pageInfo.getList();

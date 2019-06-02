@@ -22,7 +22,8 @@ public class Content {
     private Integer look;
 
     private String url;
-    
-    private List<String> tagList;
 
+    private Integer nid;
+
+    private List<String> tagList;
 }

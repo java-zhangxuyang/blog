@@ -7,6 +7,8 @@ public class Navigation {
 
     private String url;
 
+    private Integer sort;
+
     public Integer getId() {
         return id;
     }
@@ -29,5 +31,13 @@ public class Navigation {
 
     public void setUrl(String url) {
         this.url = url == null ? null : url.trim();
+    }
+
+    public Integer getSort() {
+        return sort;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
     }
 }

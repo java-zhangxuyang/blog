@@ -624,6 +624,66 @@ public class ContentExample {
             addCriterion("url not between", value1, value2, "url");
             return (Criteria) this;
         }
+
+        public Criteria andNidIsNull() {
+            addCriterion("nid is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNidIsNotNull() {
+            addCriterion("nid is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNidEqualTo(Integer value) {
+            addCriterion("nid =", value, "nid");
+            return (Criteria) this;
+        }
+
+        public Criteria andNidNotEqualTo(Integer value) {
+            addCriterion("nid <>", value, "nid");
+            return (Criteria) this;
+        }
+
+        public Criteria andNidGreaterThan(Integer value) {
+            addCriterion("nid >", value, "nid");
+            return (Criteria) this;
+        }
+
+        public Criteria andNidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("nid >=", value, "nid");
+            return (Criteria) this;
+        }
+
+        public Criteria andNidLessThan(Integer value) {
+            addCriterion("nid <", value, "nid");
+            return (Criteria) this;
+        }
+
+        public Criteria andNidLessThanOrEqualTo(Integer value) {
+            addCriterion("nid <=", value, "nid");
+            return (Criteria) this;
+        }
+
+        public Criteria andNidIn(List<Integer> values) {
+            addCriterion("nid in", values, "nid");
+            return (Criteria) this;
+        }
+
+        public Criteria andNidNotIn(List<Integer> values) {
+            addCriterion("nid not in", values, "nid");
+            return (Criteria) this;
+        }
+
+        public Criteria andNidBetween(Integer value1, Integer value2) {
+            addCriterion("nid between", value1, value2, "nid");
+            return (Criteria) this;
+        }
+
+        public Criteria andNidNotBetween(Integer value1, Integer value2) {
+            addCriterion("nid not between", value1, value2, "nid");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

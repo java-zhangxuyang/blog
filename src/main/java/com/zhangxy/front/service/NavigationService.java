@@ -16,7 +16,9 @@ public class NavigationService {
 	private NavigationMapper navMapper;
 	
 	public List<Navigation> getNavigationList(){
-		List<Navigation> list = navMapper.selectByExample(new NavigationExample());
+		NavigationExample example = new NavigationExample();
+		example.setOrderByClause(" sort asc ");
+		List<Navigation> list = navMapper.selectByExample(example);
 		return list;
 	}
 

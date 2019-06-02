@@ -30,16 +30,16 @@ public class IndexControler {
 	private NavigationService navService;
 	
 	@GetMapping("/")
-	public String index(Integer pageNum, Model model,HttpServletRequest request) {
+	public String index(Integer nid ,Integer pageNum, Model model,HttpServletRequest request) {
 		String ip = IPUtils.getIpAddrByRequest(request);
-		log.info("ip:" + ip + "查看了你的博客");
-		PageInfo<Content> contentList = indexService.getContentList(pageNum);
+		log.info("ip:" + ip + "访问博客");
+		PageInfo<Content> contentList = indexService.getContentList(nid, pageNum);
 		model.addAttribute("conList", contentList);
 		List<Tags> tagList = indexService.getTagList();
 		model.addAttribute("tagList", tagList);
 		List<Navigation> navList = navService.getNavigationList();
 		model.addAttribute("navList", navList);
-		return "/front/index";
+		return "front/index";
 	}
 	
 

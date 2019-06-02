@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <script src="/js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/bootstrap/js//bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="/js/front/index.js" type="text/javascript" charset="utf-8"></script>
-<link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css"/>
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css"/>
 <link rel="stylesheet" href="/css/front/general.css"/>
 <link rel="stylesheet" href="/css/front/index.css"/>
 <link rel="stylesheet" href="/css/kjzt/style.css"/>
@@ -37,7 +37,11 @@
 		</div>
 		<div class="content">
 			<div class="left col-md-8"><!-- 内容体 -->
-			
+				<%for(con in conList.list){%>
+					<div>
+						${con.title}
+					</div>
+				<%}%>
 			</div>
 			<div class="right col-md-4"><!-- 右边 -->
 				<div><!-- 右上 -->
