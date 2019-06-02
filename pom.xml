@@ -186,20 +186,6 @@
 				</configuration>
 			</plugin>
 			
-			<resources>
-	            <resource>
-	                <directory>src/main/resources</directory>
-	                <includes>
-	                    <include>*.properties</include>
-	                    <include>*.xml</include>
-	                    <include>templates/front/*.html</include>
-	                    <include>templates/admin/*.html</include>
-	                </includes>
-	                <filtering>false</filtering>
-	            </resource>
-	        </resources>
-			    
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
