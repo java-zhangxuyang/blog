@@ -4,13 +4,13 @@
 	
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.yaa.site</groupId>
-	<artifactId>site_blog</artifactId>
+	<groupId>com.zhangxy</groupId>
+	<artifactId>blog</artifactId>
 	<version>1.0</version>
 	<packaging>jar</packaging>
 
-	<name>site_blog</name>
-	<description>my blog site</description>
+	<name>blog</name>
+	<description>young's blog</description>
 
 	<parent>
         <groupId>org.springframework.boot</groupId>
