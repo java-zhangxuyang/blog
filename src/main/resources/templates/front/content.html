@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="/js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/bootstrap/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/js/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+<script src="/js/front/index.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="/css/front/general.css"/>
+<link rel="stylesheet" href="/css/front/index.css"/>
+<link rel="stylesheet" href="/css/kjzt/style.css"/>
+
+<title>欢迎来到Young微博</title>
+</head>
+<body>
+	<div><!-- 整体div -->
+		<div class="banner"><!-- 导航栏 -->
+			<div class = "logo col-md-2">
+				<img alt="LOGO" src="/image/logo.jpg">
+			</div>
+			<div class = "navig col-md-7">
+				<ul class="nav nav-tabs nav-justified">
+				  <%for(navl in navList){%>
+				  	<%if(navl.id == con.id){%>
+					  <li class="active"><a href="${navl.url}">${navl.name}</a></li>
+				  	<%}else{%>
+					  <li><a href="${navl.url}">${navl.name}</a></li>
+				  	<%}%>
+				  <%}%>
+				</ul>
+			</div>
+			<div class = "navig col-md-3">
+				<form class="form-inline" role="form">
+			        <div class="form-group">
+				        <input type="text" class="form-control" id="likeName"  name = "likeName"
+						   placeholder="请输入关键词" width="100px">
+				        </div>
+				         <button id="searchBotton" type="button" class="btn btn-default btn-sm">
+				          	<span class="glyphicon glyphicon-search"></span> 搜索
+				        </button>
+					</div>
+				</form>
+		</div>
+		<div class="content">
+			<div class="left col-md-1">
+			</div>
+			<div class="left col-md-7"><!-- 内容体 -->
+				<div id="myCarousel" class="carousel slide" style="margin-bottom: 40px;">
+				    <!-- 轮播（Carousel）指标 -->
+				    <ol class="carousel-indicators">
+				        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				        <li data-target="#myCarousel" data-slide-to="1"></li>
+				        <li data-target="#myCarousel" data-slide-to="2"></li>
+				    </ol>   
+				    <!-- 轮播（Carousel）项目 -->
+				    <div class="carousel-inner">
+				        <div class="item active">
+				            <img src="/image/banner1.png" alt="First slide">
+				        </div>
+				        <div class="item">
+				            <img src="/image/banner2.jpg" alt="Second slide">
+				        </div>
+				        <div class="item">
+				            <img src="/image/banner3.jpg" alt="Third slide">
+				        </div>
+				    </div>
+				    <!-- 轮播（Carousel）导航 -->
+					<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+						<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+						<span class="sr-only">Previous</span>
+					</a>
+					<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+						<span class="sr-only">Next</span>
+					</a>
+				</div>
+				<div>
+					<h2>${con.title}</h2>
+				</div>
+				<div>
+					${con.content}
+				</div>
+			</div>
+			<div class="right col-md-3"><!-- 右边 -->
+				<div onload="show()" id = "show_time" class="screen-time">
+				    <script>
+				    	setInterval("show_time.innerHTML=new Date().toLocaleString()+' 星期'+'日一二三四五六'.charAt(new Date().getDay());",1000);
+					</script>
+			    </div>
+				<div class="zxytags"><!-- 右上 -->
+					<h2>常用标签组</h2>
+					<ul class="nav nav-pills nav-stacked">
+						<%for(tag in tagList){%>
+							<li>
+								<a href="/index?">
+									<span class="badge pull-right">${tag.count}</span>
+									${tag.name}
+								</a>
+							</li>
+						<%}%>
+					</ul>
+				</div>
+				<div class="myProfile"><!-- 右下 -->
+					<h2>博主简介</h2>
+					<div class="xinxi">
+						<div class="col-md-7">
+							<span>姓名：张旭阳 </span><br/>
+							<span>英文名：Young</span><br/>
+							<span>出生：1994.8.15</span><br/>
+							<span>籍贯：河南郑州</span><br/>
+							<span>岗位：java开发</span><br/>
+							<span>工龄：3年</span><br/>
+							<span>Q Q：994134665</span><br/>
+							<span>微信：qingxin994</span><br/>
+						</div>
+						<div class="col-md-5">
+							<img alt="照片" src="/image/me.jpg" width="90%" height="90%">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="left col-md-1">
+			</div>
+		</div>
+		<div class="fcol-md-12" style="height:100px; margin-top: 40px;">
+			<div class="col-md-1"></div>
+			<div class="footer col-md-10">
+				<p>Young's blog : www.youngzhang.cn</p>
+				<p>本站所有内容如有侵权行为，请联系本人删除！</p>
+				<p>本博客由本人自主开发使用，维权必究。</p>
+			</div>
+			<div class="col-md-11"></div>
+			
+		</div>
+	</div>
+</body>
+</html>
