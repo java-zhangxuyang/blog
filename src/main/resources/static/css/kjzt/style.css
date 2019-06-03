@@ -7,8 +7,7 @@
 
 .screen-time {
     font-family: 'lcd';
-    font-size: 20px;
+    font-size: 30px;
     color: #60B7ff;
-    text-align: right;
-    padding-top: 50px;
+    text-align: center;
 }

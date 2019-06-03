@@ -16,10 +16,12 @@ import com.github.pagehelper.PageInfo;
 import com.zhangxy.base.utils.IPUtils;
 import com.zhangxy.front.service.IndexService;
 import com.zhangxy.front.service.NavigationService;
+import com.zhangxy.mapper.TagsMapper;
 import com.zhangxy.model.Content;
 import com.zhangxy.model.Navigation;
 import com.zhangxy.model.Tags;
 
+import jodd.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -31,19 +33,46 @@ public class IndexControler {
 	@Autowired
 	private NavigationService navService;
 	
-	@GetMapping("/")
-	public String index(Integer nid ,Integer pageNum, Model model,HttpServletRequest request) {
+	@GetMapping({"/","/index"})
+	public String index(String likeName, Integer tid, Integer nid ,Integer pageNum, Model model,HttpServletRequest request) {
+		nid = nid == null ? 1 : nid;
 		String ip = IPUtils.getIpAddrByRequest(request);
 		log.info("ip:" + ip + "访问博客");
-		PageInfo<Content> contentList = indexService.getContentList(nid, pageNum);
-		model.addAttribute("conList", contentList);
+		if(StringUtil.isNotBlank(likeName)) {
+			PageInfo<Content> contentList = indexService.getContentLikeName(likeName, pageNum);
+			model.addAttribute("conList", contentList);
+			Navigation nav = new Navigation();
+			nav.setName(likeName);
+			model.addAttribute("nav", nav);
+		} else if(tid != null) {
+			Tags tag = indexService.getTagByTid(tid);
+			PageInfo<Content> contentList = indexService.getTagListById(tid, pageNum);
+			model.addAttribute("conList", contentList);
+			Navigation nav = new Navigation();
+			nav.setName(tag.getName());
+			model.addAttribute("nav", nav);
+		} else {
+			Navigation nav = navService.getNavigationById(nid);
+			model.addAttribute("nav", nav==null?new Navigation():nav);
+			PageInfo<Content> contentList = indexService.getContentList(nid, pageNum);
+			model.addAttribute("conList", contentList);
+		}
 		List<Tags> tagList = indexService.getTagList();
 		model.addAttribute("tagList", tagList);
 		List<Navigation> navList = navService.getNavigationList();
 		model.addAttribute("navList", navList);
-		model.addAttribute("title", "young博客");
 		return "front/index";
 	}
 	
+	@GetMapping("/detailed")
+	public String goDetailed(Model model,Integer id) {
+		List<Tags> tagList = indexService.getTagList();
+		model.addAttribute("tagList", tagList);
+		List<Navigation> navList = navService.getNavigationList();
+		model.addAttribute("navList", navList);
+		Content con = indexService.getContentById(id);
+		model.addAttribute("con", con);
+		return "front/content";
+	}
 
 }

@@ -29,14 +29,13 @@ public class IndexService {
 	private TagsMapper tagsMapper;
 	
 	/**
-	  * 获取文章列表  （分页）
+	  * 根据导航栏id获取文章列表  （分页）
 	 * @param pageNum 页数
 	 * @param pageNum 
 	 * @return
 	 */
 	public PageInfo<Content> getContentList(Integer nid, Integer pageNum){
 		pageNum = pageNum == null ? 1 :pageNum;
-		nid = nid == null ? 1 : nid;
 		PageHelper.startPage(pageNum, 10);
 		ContentExample example = new ContentExample();
 		example.setOrderByClause(" top desc, time desc");
@@ -55,6 +54,38 @@ public class IndexService {
 					}
 				}
 			}
+			content.setContent(content.getContent().substring(0, 100));
+			content.setTagList(tagList);
+		}
+		return pageInfo;
+	}
+	/**
+	 * 根据title模糊查询 获取文章列表  （分页）
+	 * @param pageNum 页数
+	 * @param pageNum 
+	 * @return
+	 */
+	public PageInfo<Content> getContentLikeName(String likeName, Integer pageNum){
+		pageNum = pageNum == null ? 1 :pageNum;
+		PageHelper.startPage(pageNum, 10);
+		ContentExample example = new ContentExample();
+		example.setOrderByClause(" top desc, time desc");
+		example.createCriteria().andTitleLike("%"+likeName+"%");
+		List<Content> list = contentMapper.selectByExample(example);
+		PageInfo<Content> pageInfo = new PageInfo<>(list);
+		List<Content> resule = pageInfo.getList();
+		for (Content content : resule) {
+			List<String> tagList = new ArrayList<>();
+			List<center> tidList = centerMapper.getTagListByCid(content.getId());
+			if(!tidList.isEmpty() && tidList.size() > 0) {
+				for (center cen : tidList) {
+					Tags tag = tagsMapper.selectByPrimaryKey(cen.getTid());
+					if(null != tag) {
+						tagList.add(tag.getName());
+					}
+				}
+			}
+			content.setContent(content.getContent().substring(0, 100));
 			content.setTagList(tagList);
 		}
 		return pageInfo;
@@ -71,6 +102,50 @@ public class IndexService {
 		List<Tags> list = tagsMapper.selectByExample(example);
 		PageInfo<Tags> pageInfo = new PageInfo<>(list);
 		return pageInfo.getList();
+	}
+	
+	public PageInfo<Content> getTagListById(Integer tid,Integer pageNum){
+		pageNum = pageNum == null ? 1 :pageNum;
+		List<center> cenList = centerMapper.getTagListByTid(tid);
+		List<Integer> cidList = this.getCidByCenList(cenList);
+		PageHelper.startPage(pageNum, 10);
+		ContentExample example = new ContentExample();
+		example.setOrderByClause(" top desc, time desc");
+		example.createCriteria().andIdIn(cidList);
+		List<Content> list = contentMapper.selectByExample(example);
+		PageInfo<Content> pageInfo = new PageInfo<>(list);
+		List<Content> resule = pageInfo.getList();
+		for (Content content : resule) {
+			List<String> tagList = new ArrayList<>();
+			List<center> tidList = centerMapper.getTagListByTid(content.getId());
+			if(!tidList.isEmpty() && tidList.size() > 0) {
+				for (center cen : tidList) {
+					Tags tag = tagsMapper.selectByPrimaryKey(cen.getTid());
+					if(null != tag) {
+						tagList.add(tag.getName());
+					}
+				}
+			}
+			content.setContent(content.getContent().substring(0, 100));
+			content.setTagList(tagList);
+		}
+		return pageInfo;
+	}
+	
+	public List<Integer> getCidByCenList(List<center> list){
+		List<Integer> arrlist = new ArrayList<>();
+		for (center cen : list) {
+			arrlist.add(cen.getCid());
+		}
+		return arrlist;
+	}
+	public Tags getTagByTid(Integer tid){
+		Tags tag = tagsMapper.selectByPrimaryKey(tid);
+		return tag;
+	}
+	public Content getContentById(Integer id){
+		Content con = contentMapper.selectByPrimaryKey(id);
+		return con;
 	}
 
 }

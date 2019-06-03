@@ -11,6 +11,9 @@ import com.zhangxy.model.center;
 public interface CenterMapper {
 
 	@Select("select * from center where cid = #{cid}")
-	List<center> getTagListByTid(Integer cid);
+	List<center> getTagListByCid(Integer cid);
+	
+	@Select("select * from center where cid = #{tid}")
+	List<center> getTagListByTid(Integer tid);
 	
 }

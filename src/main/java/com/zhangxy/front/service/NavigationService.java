@@ -21,5 +21,9 @@ public class NavigationService {
 		List<Navigation> list = navMapper.selectByExample(example);
 		return list;
 	}
+	public Navigation getNavigationById(Integer nid){
+		Navigation nav = navMapper.selectByPrimaryKey(nid);
+		return nav;
+	}
 
 }
