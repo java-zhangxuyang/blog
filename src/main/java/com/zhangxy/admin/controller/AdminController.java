@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,13 +15,17 @@ import com.zhangxy.base.support.ResponseBo;
 import com.zhangxy.model.User;
 
 @Controller
-@RequestMapping(value = "/admin")
 public class AdminController extends BaseController {
 	
 	@Autowired
 	private AdminSerivce indexSerivce;
 	
-	@PostMapping("/login")
+	@GetMapping("/admin")
+	public String admin() {
+		return "/admin/login";
+	}
+	
+	@PostMapping("/admin/login")
 	@ResponseBody
 	public Object login(User user, HttpServletRequest request) {
 		Integer error_count = cache.get("login_error_count");

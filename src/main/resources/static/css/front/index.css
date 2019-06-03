@@ -55,11 +55,12 @@ h2{
 }
 
 .right > .myProfile > .xinxi{
-	padding-top:30px;
+	/* padding-left:50px;
+	padding-top:30px; */
 	font-size: 30px;
 	margin-left: 35px;
 	line-height: 50px;
-	border: 1px #1A7DA8 solid;
+/* 	border: 1px #1A7DA8 solid; */
 	height: 460px;
 }
 
