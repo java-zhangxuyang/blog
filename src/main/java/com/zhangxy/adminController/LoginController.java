@@ -1,4 +1,4 @@
-package com.zhangxy.admin.controller;
+package com.zhangxy.adminController;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.zhangxy.admin.service.LoginSerivce;
 import com.zhangxy.base.controler.BaseController;
 import com.zhangxy.base.support.ResponseBo;
 import com.zhangxy.model.User;
+import com.zhangxy.service.LoginSerivce;
 
 @RestController
 public class LoginController  extends BaseController{

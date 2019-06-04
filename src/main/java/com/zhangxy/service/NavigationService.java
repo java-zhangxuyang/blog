@@ -1,4 +1,4 @@
-package com.zhangxy.front.service;
+package com.zhangxy.service;
 
 import java.util.List;
 

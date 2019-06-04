@@ -1,4 +1,4 @@
-package com.zhangxy.front.controller;
+package com.zhangxy.frontController;
 
 import java.util.List;
 
@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.github.pagehelper.PageInfo;
 import com.zhangxy.base.utils.IPUtils;
-import com.zhangxy.front.service.IndexService;
-import com.zhangxy.front.service.NavigationService;
 import com.zhangxy.mapper.TagsMapper;
 import com.zhangxy.model.Content;
 import com.zhangxy.model.Navigation;
 import com.zhangxy.model.Tags;
+import com.zhangxy.service.IndexService;
+import com.zhangxy.service.NavigationService;
 
 import jodd.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
