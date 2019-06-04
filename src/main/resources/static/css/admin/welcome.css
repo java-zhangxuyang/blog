@@ -1,0 +1,130 @@
+@charset "UTF-8";
+
+.boby{
+	width: 100%;
+	height: 100%;
+}
+.boby > div{
+	height: 48%;
+	width: 49%;
+	margin-top: 10px;
+	margin-bottom:10px;
+	border: 2px dashed;
+    border-image: -webkit-linear-gradient( #5CD1FD, #C86DD7) 30 30;
+    border-image: -moz-linear-gradient( #5CD1FD, #C86DD7) 30 30;
+    border-image: linear-gradient(to bottom right, #5CD1FD, #C86DD7) 10 10;
+}
+.boby > .bottom {
+	width: 99%;
+}
+.boby > .topLeft {
+	margin-right: 15px;
+}
+.boby > .topLeft >h1{
+	padding:5px 5px;
+	text-align: center;
+}
+
+*{
+    padding: 0%;
+    margin: 0%;
+}
+
+html, body{
+    background:#f2f2f2;
+}
+
+.calendar{
+    width: 100%;
+    height: 100%;
+    background: white;
+    box-shadow: 0px 1px 1px rgba(0,0,0,.1);
+}
+
+.title{
+    height: 70px;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+    position: relative;
+    text-align: center;
+}
+
+#calendar-title{
+    font-size: 20px;
+    text-transform: uppercase;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 14px 0 0 0;
+}
+
+#calendar-year{
+    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: normal;
+}
+
+#pre{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    /* background: url(prev.png) no-repeat 50% 50%; */
+    /*没规定大小时，图片显示 0X0*/
+    width: 60px;
+    height: 70px;
+    line-height: 70px;
+}
+
+#next{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    /* background: url(next.png) no-repeat 50% 50%; */
+    width: 60px;
+    height: 70px;
+    line-height: 70px;
+}  
+
+.body-list ul{
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    width: 100%;
+    box-sizing: border-box;
+
+}  
+
+.body-list ul li{
+    list-style: no
+    display: block;
+    width: 14.28%;
+    float: left;
+
+    /*规定行高，垂直居中*/
+    height: 56px;
+    line-height: 56px;
+    box-sizing: border-box;
+    text-align: center;
+    
+}
+
+.green{
+    color:#6ac13c;
+}
+
+.lightgrey{ /*浅灰色显示过去的日期*/
+ color:#a8a8a8;
+}   
+.darkgrey{ /*深灰色显示将来的日期*/
+ color:#565656;
+}
+
+/*日期当天用绿色背景绿色文字加以显示*/
+.greenbox{
+    border: 1px solid #6ac13c;
+    background: #e9f8df;
+}
+.bottom > h1{
+	text-align: center;
+	padding:25px 5px;
+}
+#zxt{
+	height: 80%;
+}
