@@ -11,7 +11,7 @@ import com.zhangxy.base.support.ResponseBo;
 import com.zhangxy.model.User;
 
 @Service
-public class AdminSerivce {
+public class LoginSerivce {
 	
 	
 	@SuppressWarnings("rawtypes")
