@@ -33,4 +33,9 @@ public class LoginSerivce {
         responseBo.setMsg("用户名或密码错误");
         return responseBo;
 	}
+	
+	public ResponseBo loginOut(HttpServletRequest request){
+		request.getSession().removeAttribute("user");
+		return ResponseBo.ok();
+	}
 }

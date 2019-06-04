@@ -3,7 +3,6 @@
  */
 $(function(){
 	$("#loginButton").click(function(){
-		console.info("111")
 		$.ajax({
             type: "POST",
             url: "/login",

@@ -3,27 +3,33 @@ package com.zhangxy.adminController;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.zhangxy.base.controler.BaseController;
 import com.zhangxy.base.support.ResponseBo;
 import com.zhangxy.model.User;
 import com.zhangxy.service.LoginSerivce;
 
-@RestController
+@Controller
 public class LoginController  extends BaseController{
 	
 	@Autowired
-	private LoginSerivce indexSerivce;
+	private LoginSerivce loginSerivce;
+	
+	@GetMapping("/admin")
+	public String admin() {
+		return "/admin/login";
+	}
 	
 	@PostMapping("/login")
 	@ResponseBody
 	public Object login(User user, HttpServletRequest request) {
 		Integer error_count = cache.get("login_error_count");
         if (error_count==null || error_count < 3) {
-            ResponseBo responseBo = indexSerivce.login(user,request);
+            ResponseBo responseBo = loginSerivce.login(user,request);
             if (responseBo.getCode() == -1) {
                 error_count = null == error_count ? 1 : error_count + 1;
                 cache.set("login_error_count", error_count, 10 * 60);
