@@ -147,5 +147,11 @@ public class IndexService {
 		Content con = contentMapper.selectByPrimaryKey(id);
 		return con;
 	}
+	public Content lookAdd(Integer id) {
+		Content con = this.getContentById(id);
+		con.setLook(con.getLook() + 1);
+		contentMapper.updateByPrimaryKeySelective(con);
+		return con;
+	}
 
 }

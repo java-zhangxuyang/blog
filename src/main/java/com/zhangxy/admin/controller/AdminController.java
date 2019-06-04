@@ -25,7 +25,7 @@ public class AdminController extends BaseController {
 		return "/admin/login";
 	}
 	
-	@PostMapping("/admin/login")
+	@PostMapping("/login")
 	@ResponseBody
 	public Object login(User user, HttpServletRequest request) {
 		Integer error_count = cache.get("login_error_count");

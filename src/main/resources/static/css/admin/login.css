@@ -1,5 +1,6 @@
 body{
     background: url("/image/background/background4.jpg");
+     background-size: 100% auto;
     animation-name:myfirst;
     animation-duration:12s;
     /*变换时间*/
@@ -12,10 +13,10 @@ body{
 }
 @keyframes myfirst
 {
-    0%   {background:url("/image/background/background1.jpg");}
-    34%  {background:url("/image/background/background2.jpg");}
-    67%  {background:url("/image/background/background3.jpg");}
-    100% {background:url("/image/background/background4.jpg");}
+    0%   {background:url("/image/background/background1.jpg"); background-size: 100% auto;}
+    34%  {background:url("/image/background/background2.jpg"); background-size: 100% auto;}
+    67%  {background:url("/image/background/background3.jpg"); background-size: 100% auto;}
+    100% {background:url("/image/background/background4.jpg"); background-size: 100% auto;}
 }
 .form{background: rgba(255,255,255,0.2);width:400px;margin:120px auto;}
 /*阴影*/
@@ -24,5 +25,5 @@ input[type="text"],input[type="password"]{padding-left:26px;}
 .checkbox{padding-left:21px;}
 
 .container{
-	
+	margin-top: 100px;
 }

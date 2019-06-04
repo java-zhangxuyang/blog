@@ -70,7 +70,7 @@ public class IndexControler {
 		model.addAttribute("tagList", tagList);
 		List<Navigation> navList = navService.getNavigationList();
 		model.addAttribute("navList", navList);
-		Content con = indexService.getContentById(id);
+		Content con = indexService.lookAdd(id);
 		model.addAttribute("con", con);
 		return "front/content";
 	}
