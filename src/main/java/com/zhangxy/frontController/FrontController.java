@@ -122,7 +122,6 @@ public class FrontController  extends BaseController{
 	@PostMapping("addmessage")
 	@ResponseBody
 	public Integer addmessage(String pass) {
-		
 		return 0;
 	}
 	
