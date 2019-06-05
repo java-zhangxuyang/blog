@@ -1,6 +1,7 @@
 package com.zhangxy.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,6 +96,7 @@ public class ContentService {
 	}
 
 	public Integer addCom(Content con) {
+		con.setTime(new Date());
 		int i = conMapper.insertSelective(con);
 		if(i > 0 && con.getTidList() != null && con.getTidList().size() > 0) {
 			for (Integer tid : con.getTidList()) {

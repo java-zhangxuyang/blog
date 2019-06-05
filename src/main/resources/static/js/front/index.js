@@ -35,16 +35,31 @@ $(function(){
         });
 	})
 	$("#massage").click(function(){
+		var name = $("#ipname").val();
+		if(name==null || name==""){
+			layer.alert('请输入昵称！', {
+			  skin: 'layui-layer-molv' //样式类名
+			  ,closeBtn: 0
+			}, function(){
+				layer.close();
+			});
+			return;
+		}
 		$.ajax({
 			type: "POST",
 			url: "/front/addmessage",
-			data: {pass:$("#pass").val()},
+			data: {massage:$("#content").val(),name:name,ip:$("#ip").val()},
 			dataType: "json",
 			success: function(data){
 				if(data == 0){
-					layer.msg("密码错误");
+					layer.msg("留言出错了~您再试试？");
 				}else if(data == 1){
-					window.location.href="/front/toResume"; 
+					layer.alert('留言成功，感谢您的留言和支持！', {
+					  skin: 'layui-layer-molv' //样式类名
+					  ,closeBtn: 0
+					}, function(){
+						window.location.href="/front/message"; 
+					});
 				}
 				
 			},
@@ -53,4 +68,6 @@ $(function(){
 			}
 		});
 	})
+	
 })
+

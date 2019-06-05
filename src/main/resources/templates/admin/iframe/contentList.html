@@ -54,8 +54,8 @@
 						<%if(info.isHasPreviousPage){%>
 						    <li><a href="/admin/contentList?pageNum=${info.prePage}">&laquo;</a></li>
 						<%}%>
-						<%var i = info.pages;
-						for(i;i>0;i--){%>
+						<%
+						for(var i = 1;i<=info.pages;i++){%>
 						    <li 
 						    	<%if(i == info.pageNum){%>
 						    		class="active"

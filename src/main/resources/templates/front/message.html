@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <script src="/js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/js/wangEditor.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="/bootstrap/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="/js/layer/layer.js" type="text/javascript" charset="utf-8"></script>
 <script src="/js/front/index.js" type="text/javascript" charset="utf-8"></script>
@@ -12,6 +13,34 @@
 <link rel="stylesheet" href="/css/kjzt/style.css"/>
 
 <title>欢迎来到Young微博</title>
+
+<style type="text/css">
+#editor{
+	margin-bottom: 10px;
+}
+#mass{
+	float: left;
+}
+#name{
+	margin-right:50px;
+	float: left;
+	width: 90%;
+}
+.mess{
+	height: 170px;
+	border-bottom: 1px #000 dashed;
+	margin-bottom: 10px;
+}
+.name{
+	border-right: 1px #000 dashed;
+	text-align: center;
+}
+.conmes{
+	padding-left:30px;
+	padding-top: 10px;
+	overflow: hidden;
+}
+</style>
 </head>
 <body>
 	<div><!-- 整体div -->
@@ -79,13 +108,44 @@
 					<form role="form">
 						<div id="editor"></div>
 					  <div class="form-group" style="display: none;">
-					    <textarea class="form-control" id = "content"></textarea>
+					    <textarea class="form-control" id = "content" name = "message"></textarea>
+					    <input type="text" id = "ip" name = "ip" class="form-control" value="${ip!}">
 					  </div>
-					  <button id="massage" class="btn btn-primary">留言</button>
+					  <div class="form-group" id="name">
+					  	<input type="text" id = "ipname" name = "name" class="form-control" placeholder="留个昵称吧">
+					  	
+					  </div>
+					  <div class="form-group" id="mess">
+					  	<button id="massage" class="btn btn-primary">留言</button>
+					  </div>
 					</form>
 				</div>
-				<div>
-					
+				<%for(mes in mess.list){%>
+					<div class="mess">
+						<div class="name col-md-3">
+							<img alt="默认头像" src="/image/mrtx.jpg" width="50%" height="50%"><br/>
+						${mes.name}<br/>${mes.time,'yyyy-MM-dd HH:mm:ss'}
+						</div>
+						<div class="conmes col-md-9">${mes.massage}</div>
+					</div>
+				<%}%>
+				<div class="fenye">
+					<ul class="pagination">
+						<%if(mess.isHasPreviousPage){%>
+						    <li><a href="${nav.url}&pageNum=${mess.prePage}">&laquo;</a></li>
+						<%}%>
+						<% 
+						for(var i = 1;i<=mess.pages;i++){%>
+						    <li 
+						    	<%if(i == mess.pageNum){%>
+						    		class="active"
+								<%}%>
+						    ><a href="${nav.url}&pageNum=${i}">${i}</a></li>
+						<%}%>
+						<%if(mess.isHasNextPage){%>
+						    <li><a href="${nav.url}&pageNum=${mess.nextPage}">&raquo;</a></li>
+						<%}%>
+					</ul>
 				</div>
 			</div>
 			<div class="right col-md-3"><!-- 右边 -->

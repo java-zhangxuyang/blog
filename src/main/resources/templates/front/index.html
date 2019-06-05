@@ -95,18 +95,17 @@
 				<div class="fenye">
 					<ul class="pagination">
 						<%if(conList.isHasPreviousPage){%>
-						    <li><a href="${nav.url}?nid=${nav.id}&pageNum=${conList.prePage}">&laquo;</a></li>
+						    <li><a href="${nav.url}&pageNum=${conList.prePage}">&laquo;</a></li>
 						<%}%>
-						<%var i = conList.pages;
-						for(i;i>0;i--){%>
+						<%for(var i = 1;i<=conList.pages;i++){%>
 						    <li 
 						    	<%if(i == conList.pageNum){%>
 						    		class="active"
 								<%}%>
-						    ><a href="${nav.url}?nid=${nav.id}&pageNum=${i}">${i}</a></li>
+						    ><a href="${nav.url}&pageNum=${i}">${i}</a></li>
 						<%}%>
 						<%if(conList.isHasNextPage){%>
-						    <li><a href="${nav.url}?nid=${nav.id}&pageNum=${conList.nextPage}">&raquo;</a></li>
+						    <li><a href="${nav.url}&pageNum=${conList.nextPage}">&raquo;</a></li>
 						<%}%>
 					</ul>
 				</div>

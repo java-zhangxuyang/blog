@@ -16,9 +16,11 @@ import com.github.pagehelper.PageInfo;
 import com.zhangxy.base.controler.BaseController;
 import com.zhangxy.base.utils.IPUtils;
 import com.zhangxy.model.Content;
+import com.zhangxy.model.Message;
 import com.zhangxy.model.Navigation;
 import com.zhangxy.model.Tags;
 import com.zhangxy.service.IndexService;
+import com.zhangxy.service.MessageService;
 import com.zhangxy.service.NavigationService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +34,8 @@ public class FrontController  extends BaseController{
 	private IndexService indexService;
 	@Autowired
 	private NavigationService navService;
+	@Autowired
+	private MessageService messService;
 	
 	@GetMapping("/share")
 	public String share(Integer pageNum, Integer nid, Model model,HttpServletRequest request) {
@@ -121,8 +125,8 @@ public class FrontController  extends BaseController{
 	}
 	@PostMapping("addmessage")
 	@ResponseBody
-	public Integer addmessage(String pass) {
-		return 0;
+	public Integer addmessage(Message mess) {
+		return messService.addMessage(mess);
 	}
 	
 	@GetMapping("/message")
@@ -131,10 +135,14 @@ public class FrontController  extends BaseController{
 		model.addAttribute("tagList", tagList);
 		List<Navigation> navList = navService.getNavigationList();
 		model.addAttribute("navList", navList);
-		Navigation nav = navService.getNavigationById(6);
+		nid = nid == null ? 6 : nid;
+		Navigation nav = navService.getNavigationById(nid);
 		model.addAttribute("nav", nav);
+		PageInfo<Message> pageInfo = messService.getMessageListPage(pageNum);
+		model.addAttribute("mess", pageInfo);
 		String ip = IPUtils.getIpAddrByRequest(request);
 		log.info("ip:" + ip + "访问微博留言");
+		model.addAttribute("ip", ip);
 		return "front/message";
 	}
 }
