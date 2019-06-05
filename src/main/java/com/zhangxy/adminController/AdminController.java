@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageInfo;
 import com.zhangxy.model.Content;
+import com.zhangxy.model.Navigation;
+import com.zhangxy.model.Tags;
 import com.zhangxy.model.User;
 import com.zhangxy.service.ContentService;
 import com.zhangxy.service.LoginSerivce;
@@ -34,6 +36,9 @@ public class AdminController {
 	@Autowired
 	private LoginSerivce loginSerivce;
 	
+	/**
+	 * 后端管理主页
+	 */
 	@GetMapping("/index")
 	public String index(Model model,HttpServletRequest request) {
 		User user = (User)request.getSession().getAttribute("user");
@@ -44,17 +49,165 @@ public class AdminController {
 		return "/admin/index";
 	}
 	
+	/**
+	 * 后端管理推出登陆
+	 */
 	@PostMapping("/loginOut")
 	@ResponseBody
 	public Object loginOut(HttpServletRequest request) {
         return loginSerivce.loginOut(request);
 	}
 	
+	/**
+	 * TO 后端管理主页欢迎页面
+	 */
 	@GetMapping("/welcome")
 	public String welcome(Model model,HttpServletRequest request) {
 		List<Content> contentList = conService.getConHotList();
 		model.addAttribute("conList", contentList);
+		List<Integer> list = conService.selectCountMonth();
+		model.addAttribute("data", list);
 		return "/admin/iframe/welcome";
+	}
+	
+	/**
+	 * TO 后端管理文章列表页面
+	 */
+	@GetMapping("/contentList")
+	public String contentList(Integer pageNum, Model model,HttpServletRequest request) {
+		PageInfo<Content> info = conService.getConHotListByPage(pageNum);
+		model.addAttribute("info", info);
+		return "/admin/iframe/contentList";
+	}
+	/**
+	 * TO 后端管理文章列表页面
+	 */
+	@GetMapping("/editOrAddView")
+	public String editOrAddView(Integer id, Model model,HttpServletRequest request) {
+		Content con = new Content();
+		if(null != id) {
+			con =  conService.getConById(id);
+			model.addAttribute("sign", 1); //1 - 修改
+		}else {
+			model.addAttribute("sign", 0); //0 - 增加
+		}
+		model.addAttribute("con", con);
+		List<Tags> tagList = tagService.getTagsList();
+		model.addAttribute("tagList", tagList);
+		List<Navigation> navList = navService.getNavigationListByCon();
+		model.addAttribute("navList", navList);
+		return "/admin/iframe/editOrAddView";
+	}
+	/**
+	 * TO 添加或者修改文章
+	 */
+	@PostMapping("/editOrAddCom")
+	public String editOrAddCom(Content con) {
+		if(null != con.getId()) {
+			conService.updateCom(con);
+		}else {
+			conService.addCom(con);
+		}
+		return "redirect:/admin/contentList";
+	}
+	/**
+	 * 根据id
+	 * 删除导航栏类别
+	 */
+	@PostMapping("delNav")
+	@ResponseBody
+	public Integer delNav(Integer id) {
+		return navService.delNav(id);
+	}
+	/**
+	 * 根据id
+	 * 删除文章类别
+	 */
+	@PostMapping("delCon")
+	@ResponseBody
+	public Integer delCon(Integer id) {
+		return conService.delCon(id);
+	}
+	/**
+	 * 根据id
+	 * 删除标签类别
+	 */
+	@PostMapping("delTag")
+	@ResponseBody
+	public Integer delTag(Integer id) {
+		return tagService.delTag(id);
+	}
+	/**
+	 * TO 后端管理文章列表页面
+	 */
+	@GetMapping("/navList")
+	public String navList(Model model,HttpServletRequest request) {
+		List<Navigation> navList = navService.getNavigationList();
+		model.addAttribute("navList", navList);
+		return "/admin/iframe/navList";
+	}
+	/**
+	 * TO 后端管理文章列表页面
+	 */
+	@GetMapping("/editOrAddNav")
+	public String editOrAddNav(Integer id, Model model,HttpServletRequest request) {
+		Navigation nav = new Navigation();
+		if(null != id) {
+			nav = navService.getNavigationById(id);
+			model.addAttribute("sign", 1); //1 - 修改
+		}else {
+			model.addAttribute("sign", 0); //0 - 增加
+		}
+		model.addAttribute("nav", nav);
+		return "/admin/iframe/editOrAddNav";
+	}
+	/**
+	 * TO 后端管理文章列表页面
+	 */
+	@GetMapping("/tagsList")
+	public String tagsList(Model model,HttpServletRequest request) {
+		List<Tags> list = tagService.getTagsList();
+		model.addAttribute("list", list);
+		return "/admin/iframe/tagsList";
+	}
+	/**
+	 * TO 后端管理标签编辑页面
+	 */
+	@GetMapping("/editOrAddTag")
+	public String editOrAddTag(Integer id, Model model,HttpServletRequest request) {
+		Tags tag = new Tags();
+		if(null != id) {
+			tag = tagService.getTagsById(id);
+			model.addAttribute("sign", 1); //1 - 修改
+		}else {
+			model.addAttribute("sign", 0); //0 - 增加
+		}
+		model.addAttribute("tag", tag);
+		return "/admin/iframe/editOrAddTag";
+	}
+	/**
+	 * TO 添加或者修改标签
+	 */
+	@PostMapping("/editOrAddTag")
+	public String editOrAddTag(Tags tags) {
+		if(null != tags.getId()) {
+			tagService.updateTag(tags);
+		}else {
+			tagService.addTag(tags);
+		}
+		return "redirect:/admin/tagsList";
+	}
+	/**
+	 * TO 添加或者修改导航
+	 */
+	@PostMapping("/editOrAddNav")
+	public String editOrAddNav(Navigation nav) {
+		if(null != nav.getId()) {
+			navService.updateNav(nav);
+		}else {
+			navService.addNav(nav);
+		}
+		return "redirect:/admin/navList";
 	}
 	
 

@@ -2,9 +2,107 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="/js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/bootstrap/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/js/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="/css/front/general.css"/>
+<link rel="stylesheet" href="/css/admin/list.css"/>
 <title></title>
 </head>
 <body>
-
+	<div class="but">
+		<a href="/admin/editOrAddView" class="btn btn-info btn-lg">
+          <span class="glyphicon glyphicon-plus"></span> 写文章
+        </a>
+	</div>
+	<table class="table table-striped">
+	  <caption>文章管理列表</caption>
+	  <thead>
+	    <tr>
+	      <th>序号</th>
+	      <th>标题</th>
+	      <th>发布时间</th>
+	      <th>置顶</th>
+	      <th>点击</th>
+	      <th>链接</th>
+	      <th>导航类型</th>
+	      <th>操作</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	  	<%for(con in info.list){%>
+		    <tr>
+		      <td style="line-height: 45px;">${conLP.index}</td>
+		      <td style="line-height: 45px;">${con.title}</td>
+		      <td style="line-height: 45px;">${con.time,'yyyy-MM-dd HH:mm:ss'}</td>
+		      <td style="line-height: 45px;">${con.top?"是":"否"}</td>
+		      <td style="line-height: 45px;">${con.look}</td>
+		      <td style="line-height: 45px;"><a href="${con.url}"><button type="button" class="btn btn-link">点击浏览</button></a></td>
+		      <td style="line-height: 45px;">${con.nav}</td>
+		      <td style="line-height: 45px;">
+		      	<button type="button" class="edit btn-lg btn-primary" value="${con.id}"><span class="glyphicon glyphicon-edit"></span> &nbsp;编辑</button>
+		      	<button type="button" class="del btn-lg btn-danger" value="${con.id}"><span class="glyphicon glyphicon-remove"></span> &nbsp;删除</button>
+		      </td>
+		    </tr>
+		<%}%>
+	  </tbody>
+	  <tfoot>
+	  	<tr>
+	  		<td colspan = "8"><div class="fenye">
+					<ul class="pagination">
+						<%if(info.isHasPreviousPage){%>
+						    <li><a href="/admin/contentList?pageNum=${info.prePage}">&laquo;</a></li>
+						<%}%>
+						<%var i = info.pages;
+						for(i;i>0;i--){%>
+						    <li 
+						    	<%if(i == info.pageNum){%>
+						    		class="active"
+								<%}%>
+						    ><a href="/admin/contentList?pageNum=${i}">${i}</a></li>
+						<%}%>
+						<%if(info.isHasNextPage){%>
+						    <li><a href="/admin/contentList?pageNum=${info.nextPage}">&raquo;</a></li>
+						<%}%>
+					</ul>
+				</div></td>
+	  	</tr>
+	  </tfoot>
+	</table>
 </body>
+<script type="text/javascript">
+$(function(){
+	$(".edit").click(function(){
+		window.location.href="/admin/editOrAddView?id="+$(this).val(); 
+	})	
+	$(".del").click(function(){
+		var id = $(this).val();
+		layer.confirm('您确定要删除此文章吗？', {
+			  btn: ['确定','取消'] //按钮
+			}, function(){
+				$.ajax({
+		            type: "POST",
+		            url: "/admin/delCon",
+		            data:{id:id},
+		            dataType: "json",
+		            success: function(data){
+		            		if(data>0){
+			                	layer.msg("删除成功！");
+			                	window.location.href="/admin/contentList"; 
+		            		}else{
+			                	layer.msg("删除失败！");
+		            		}
+		                 },
+		            error:function(){
+			            	layer.msg("网络超时，请重试！");
+			            }
+		        });
+			}, function(){
+			  layer.close();
+			});
+		
+	})	
+})
+</script>
 </html>

@@ -20,10 +20,11 @@
 }
 .content{
 	margin-top:30px;
-	height: 1700px;
+	height:auto;
+	min-height: 1500px;
 }
 .content > div > .topic{
-	height: 195px;
+	height: 100px;
 	margin-top:20px;
 	border-bottom: 2px dashed;
     border-image: -webkit-linear-gradient( #5CD1FD, #C86DD7) 30 30;
@@ -59,9 +60,9 @@ h2{
 	padding-top:30px; */
 	font-size: 30px;
 	margin-left: 35px;
-	line-height: 50px;
+	line-height: 40px;
 /* 	border: 1px #1A7DA8 solid; */
-	height: 460px;
+	border: 2px #000 solid;
 }
 
 .footer{
@@ -69,5 +70,15 @@ h2{
 	text-align: center;
 	font-size: 20px;
 	padding-top: 10px;
+	margin-top: 50px;
+}
+.table > caption{
+	text-align: center;
+}
+.table > tbody > tr >td:nth-child(1) {
+	text-align: right;
+}
+.table > tbody > tr >td:nth-child(2) {
+	text-align: left;
 }
 	

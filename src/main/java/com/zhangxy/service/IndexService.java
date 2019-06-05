@@ -34,7 +34,7 @@ public class IndexService {
 	 * @param pageNum 
 	 * @return
 	 */
-	public PageInfo<Content> getContentList(Integer nid, Integer pageNum){
+	public PageInfo<Content> getContentListByNid(Integer nid, Integer pageNum){
 		pageNum = pageNum == null ? 1 :pageNum;
 		PageHelper.startPage(pageNum, 10);
 		ContentExample example = new ContentExample();
@@ -54,7 +54,29 @@ public class IndexService {
 					}
 				}
 			}
-			content.setContent(content.getContent().substring(0, 100));
+			content.setTagList(tagList);
+		}
+		return pageInfo;
+	}
+	public PageInfo<Content> getContentList(Integer pageNum){
+		pageNum = pageNum == null ? 1 :pageNum;
+		PageHelper.startPage(pageNum, 10);
+		ContentExample example = new ContentExample();
+		example.setOrderByClause(" top desc, time desc");
+		List<Content> list = contentMapper.selectByExample(example);
+		PageInfo<Content> pageInfo = new PageInfo<>(list);
+		List<Content> resule = pageInfo.getList();
+		for (Content content : resule) {
+			List<String> tagList = new ArrayList<>();
+			List<center> tidList = centerMapper.getTagListByTid(content.getId());
+			if(!tidList.isEmpty() && tidList.size() > 0) {
+				for (center cen : tidList) {
+					Tags tag = tagsMapper.selectByPrimaryKey(cen.getTid());
+					if(null != tag) {
+						tagList.add(tag.getName());
+					}
+				}
+			}
 			content.setTagList(tagList);
 		}
 		return pageInfo;
@@ -85,7 +107,6 @@ public class IndexService {
 					}
 				}
 			}
-			content.setContent(content.getContent().substring(0, 100));
 			content.setTagList(tagList);
 		}
 		return pageInfo;

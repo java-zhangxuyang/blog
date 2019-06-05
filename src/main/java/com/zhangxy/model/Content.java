@@ -24,6 +24,10 @@ public class Content {
     private String url;
 
     private Integer nid;
+    
+    private String nav;
 
     private List<String> tagList;
+    
+    private List<Integer> tidList;
 }

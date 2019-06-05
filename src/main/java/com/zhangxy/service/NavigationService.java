@@ -1,5 +1,6 @@
 package com.zhangxy.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +22,27 @@ public class NavigationService {
 		List<Navigation> list = navMapper.selectByExample(example);
 		return list;
 	}
+	public List<Navigation> getNavigationListByCon(){
+		List<Integer> intList = new ArrayList<Integer>();
+		intList.add(1);intList.add(5);intList.add(6);
+		NavigationExample example = new NavigationExample();
+		example.setOrderByClause(" sort asc ");
+		example.createCriteria().andIdNotIn(intList);
+		List<Navigation> list = navMapper.selectByExample(example);
+		return list;
+	}
 	public Navigation getNavigationById(Integer nid){
 		Navigation nav = navMapper.selectByPrimaryKey(nid);
 		return nav;
+	}
+	public Integer delNav(Integer id) {
+		return navMapper.deleteByPrimaryKey(id);
+	}
+	public void updateNav(Navigation nav) {
+		navMapper.updateByPrimaryKeySelective(nav);
+	}
+	public void addNav(Navigation nav) {
+		navMapper.insertSelective(nav);
 	}
 
 }

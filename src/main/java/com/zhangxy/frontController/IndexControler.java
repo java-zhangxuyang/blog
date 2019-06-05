@@ -8,13 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.github.pagehelper.PageInfo;
 import com.zhangxy.base.utils.IPUtils;
-import com.zhangxy.mapper.TagsMapper;
 import com.zhangxy.model.Content;
 import com.zhangxy.model.Navigation;
 import com.zhangxy.model.Tags;
@@ -34,8 +30,7 @@ public class IndexControler {
 	private NavigationService navService;
 	
 	@GetMapping({"/","/index"})
-	public String index(String likeName, Integer tid, Integer nid ,Integer pageNum, Model model,HttpServletRequest request) {
-		nid = nid == null ? 1 : nid;
+	public String index(String likeName, Integer nid, Integer tid,Integer pageNum, Model model,HttpServletRequest request) {
 		String ip = IPUtils.getIpAddrByRequest(request);
 		log.info("ip:" + ip + "访问博客");
 		if(StringUtil.isNotBlank(likeName)) {
@@ -52,9 +47,11 @@ public class IndexControler {
 			nav.setName(tag.getName());
 			model.addAttribute("nav", nav);
 		} else {
+			nid = nid == null? 1 : nid;
+			PageInfo<Content>  contentList = indexService.getContentList(pageNum);
 			Navigation nav = navService.getNavigationById(nid);
-			model.addAttribute("nav", nav==null?new Navigation():nav);
-			PageInfo<Content> contentList = indexService.getContentList(nid, pageNum);
+			nav.setName("最新文章");
+			model.addAttribute("nav", nav);
 			model.addAttribute("conList", contentList);
 		}
 		List<Tags> tagList = indexService.getTagList();
