@@ -1,0 +1,32 @@
+@charset "UTF-8";
+.but{
+	width: 100%;
+	height: 70px;
+	line-height: 70px;
+	padding-left: 50px;
+}
+.but > button{
+	margin-right: 100px;
+	margin-top: 20px;
+	float: right;
+}
+.fenye{
+	text-align: center;
+}
+table{
+	height: 100%;
+	width: 100%
+}
+
+table > caption{
+	text-align: center;
+	font-size: 30px;
+}
+table > thead > tr >th {
+	height: 50px;
+	text-align: center;
+}
+table > tbody > tr > td{
+	text-align: center;
+	line-height: 50px;
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="/js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/bootstrap/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/js/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="/css/front/general.css"/>
+<link rel="stylesheet" href="/css/admin/list.css"/>
+<title></title>
+</head>
+<body>
+	<div class="but">
+		<a href="/admin/editOrAddNav" class="btn btn-info btn-lg">
+          <span class="glyphicon glyphicon-plus"></span> 添加导航类别
+        </a>
+	</div>
+	<table class="table table-striped">
+	  <caption>导航栏管理列表</caption>
+	  <thead>
+	    <tr>
+	      <th>序号</th>
+	      <th>类别</th>
+	      <th>链接</th>
+	      <th>排序权重</th>
+	      <th>操作</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	  	<%for(nav in navList){%>
+		    <tr>
+		      <td style="line-height: 45px;">${navLP.index}</td>
+		      <td style="line-height: 45px;">${nav.name}</td>
+		      <td style="line-height: 45px;">${nav.url}</td>
+		      <td style="line-height: 45px;">${nav.sort}</td>
+		      <td style="line-height: 45px;">
+		      	<button type="button" class="edit btn-lg btn-primary" value="${nav.id}"><span class="glyphicon glyphicon-edit"></span> &nbsp;编辑</button>
+		      	<button type="button" class="del btn-lg btn-danger" value="${nav.id}"><span class="glyphicon glyphicon-remove"></span> &nbsp;删除</button>
+		      </td>
+		    </tr>
+		<%}%>
+	  </tbody>
+	</table>
+</body>
+<script type="text/javascript">
+$(function(){
+	$(".edit").click(function(){
+		window.location.href="/admin/editOrAddNav?id="+$(this).val(); 
+	})	
+	$(".del").click(function(){
+		var id = $(this).val();
+		layer.confirm('您确定要删除此导航吗？', {
+			  btn: ['确定','取消'] //按钮
+			}, function(){
+				$.ajax({
+		            type: "POST",
+		            url: "/admin/delNav",
+		            data:{id:id},
+		            dataType: "json",
+		            success: function(data){
+		            	if(data > 0){
+		                	layer.msg("删除成功");
+		                	window.location.href="/admin/navList"; 
+		            	}else{
+		                	layer.msg("删除失败！");
+	            		}
+		                 },
+		            error:function(){
+			            	layer.msg("网络超时，请重试！");
+			            }
+		        });
+			}, function(){
+			  layer.close();
+			});
+		
+	})	
+})
+</script>
+</html>

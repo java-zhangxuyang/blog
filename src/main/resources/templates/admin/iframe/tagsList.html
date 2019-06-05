@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="/js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/js/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="/css/front/general.css"/>
+<link rel="stylesheet" href="/css/admin/list.css"/>
+<title></title>
+</head>
+<body>
+	<div class="but">
+		<a href="/admin/editOrAddTag" class="btn btn-info btn-lg">
+          <span class="glyphicon glyphicon-plus"></span> 添加标签
+        </a>
+	</div>
+	<table class="table table-striped">
+	  <caption>标签管理列表</caption>
+	  <thead>
+	    <tr>
+	      <th width="10%">序号</th>
+	      <th>标签名</th>
+	      <th>使用次数</th>
+	      <th>操作</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	  	<%for(tag in list){%>
+		    <tr>
+		      <td style="line-height: 45px;">${tagLP.index}</td>
+		      <td style="line-height: 45px;">${tag.name}</td>
+		      <td style="line-height: 45px;">${tag.count}</td>
+		      <td style="line-height: 45px;">
+		      	<button type="button" class="edit btn-lg btn-primary" value="${tag.id}"><span class="glyphicon glyphicon-edit"></span> &nbsp;编辑</button>
+		      	<button type="button" class="del btn-lg btn-danger" value="${tag.id}"><span class="glyphicon glyphicon-remove"></span> &nbsp;删除</button>
+		      </td>
+		    </tr>
+		<%}%>
+	  </tbody>
+	</table>
+</body>
+<script type="text/javascript">
+$(".edit").click(function(){
+	window.location.href="/admin/editOrAddTag?id="+$(this).val(); 
+})	
+$(".del").click(function(){
+	var id = $(this).val();
+	layer.confirm('您确定要删除此标签吗？', {
+		  btn: ['确定','取消'] //按钮
+		}, function(){
+			$.ajax({
+	            type: "POST",
+	            url: "/admin/delTag",
+	            data:{"id":id},
+	            dataType: "json",
+	            success: function(data){
+	            		if(data>0){
+		                	layer.msg("删除成功！");
+		                	window.location.href="/admin/tagsList"; 
+	            		}else{
+		                	layer.msg("删除失败！");
+	            		}
+	                 },
+	            error:function(){
+		            	layer.msg("网络超时，请重试！");
+		            }
+	        });
+		}, function(){
+		  layer.close();
+		});
+	
+})
+</script>
+</html>
