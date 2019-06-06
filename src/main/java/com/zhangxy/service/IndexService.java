@@ -132,7 +132,9 @@ public class IndexService {
 		PageHelper.startPage(pageNum, 10);
 		ContentExample example = new ContentExample();
 		example.setOrderByClause(" top desc, time desc");
-		example.createCriteria().andIdIn(cidList);
+		if(cidList!=null&&cidList.size()>0) {
+			example.createCriteria().andIdIn(cidList);
+		}
 		List<Content> list = contentMapper.selectByExample(example);
 		PageInfo<Content> pageInfo = new PageInfo<>(list);
 		List<Content> resule = pageInfo.getList();
