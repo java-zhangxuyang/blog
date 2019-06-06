@@ -105,20 +105,18 @@
 					</a>
 				</div>
 				<div>
-					<form role="form">
-						<div id="editor"></div>
-					  <div class="form-group" style="display: none;">
-					    <textarea class="form-control" id = "content" name = "message"></textarea>
-					    <input type="text" id = "ip" name = "ip" class="form-control" value="${ip!}">
-					  </div>
-					  <div class="form-group" id="name">
-					  	<input type="text" id = "ipname" name = "name" class="form-control" placeholder="留个昵称吧">
-					  	
-					  </div>
-					  <div class="form-group" id="mess">
-					  	<button id="massage" class="btn btn-primary">留言</button>
-					  </div>
-					</form>
+				<div id="editor"></div>
+				  <div class="form-group" style="display: none;">
+				    <textarea class="form-control" id = "content" name = "message"></textarea>
+				    <input type="text" id = "ip" name = "ip" class="form-control" value="${ip!}">
+				  </div>
+				  <div class="form-group" id="name">
+				  	<input type="text" id = "ipname" name = "name" class="form-control" placeholder="留个昵称吧">
+				  	
+				  </div>
+				  <div class="form-group" id="mess">
+				  	<button id="massage" class="btn btn-primary">留言</button>
+				  </div>
 				</div>
 				<%for(mes in mess.list){%>
 					<div class="mess">
