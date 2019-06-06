@@ -20,7 +20,7 @@ public class MessageService {
 	
 	public PageInfo<Message> getMessageListPage(Integer pageNum){
 		pageNum = pageNum == null ? 1 : pageNum;
-		PageHelper.startPage(pageNum, 10);
+		PageHelper.startPage(pageNum, 6);
 		List<Message> list = messMapper.selectByExample(new MessageExample());
 		PageInfo<Message> pageInfo = new PageInfo<>(list);
 		return pageInfo;

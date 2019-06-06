@@ -157,7 +157,7 @@ public class FrontController  extends BaseController{
 		List<Map<String, Object>> arrList = consService.selectCountYearMonth();
 		model.addAttribute("arrList", arrList);
 		String ip = IPUtils.getIpAddrByRequest(request);
-		log.info("ip:" + ip + "访问微博留言");
+		log.info("ip:" + ip + "访问博客留言");
 		model.addAttribute("ip", ip);
 		return "front/message";
 	}
