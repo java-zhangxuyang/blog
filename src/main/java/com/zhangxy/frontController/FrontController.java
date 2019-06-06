@@ -1,6 +1,7 @@
 package com.zhangxy.frontController;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -19,6 +20,7 @@ import com.zhangxy.model.Content;
 import com.zhangxy.model.Message;
 import com.zhangxy.model.Navigation;
 import com.zhangxy.model.Tags;
+import com.zhangxy.service.ContentService;
 import com.zhangxy.service.IndexService;
 import com.zhangxy.service.MessageService;
 import com.zhangxy.service.NavigationService;
@@ -36,6 +38,8 @@ public class FrontController  extends BaseController{
 	private NavigationService navService;
 	@Autowired
 	private MessageService messService;
+	@Autowired
+	private ContentService consService;
 	
 	@GetMapping("/share")
 	public String share(Integer pageNum, Integer nid, Model model,HttpServletRequest request) {
@@ -50,6 +54,8 @@ public class FrontController  extends BaseController{
 		model.addAttribute("tagList", tagList);
 		List<Navigation> navList = navService.getNavigationList();
 		model.addAttribute("navList", navList);
+		List<Map<String, Object>> arrList = consService.selectCountYearMonth();
+		model.addAttribute("arrList", arrList);
 		return "front/index";
 	}
 	
@@ -66,6 +72,8 @@ public class FrontController  extends BaseController{
 		model.addAttribute("tagList", tagList);
 		List<Navigation> navList = navService.getNavigationList();
 		model.addAttribute("navList", navList);
+		List<Map<String, Object>> arrList = consService.selectCountYearMonth();
+		model.addAttribute("arrList", arrList);
 		return "front/index";
 	}
 	
@@ -82,6 +90,8 @@ public class FrontController  extends BaseController{
 		model.addAttribute("tagList", tagList);
 		List<Navigation> navList = navService.getNavigationList();
 		model.addAttribute("navList", navList);
+		List<Map<String, Object>> arrList = consService.selectCountYearMonth();
+		model.addAttribute("arrList", arrList);
 		return "front/index";
 	}
 	
@@ -94,6 +104,8 @@ public class FrontController  extends BaseController{
 		model.addAttribute("tagList", tagList);
 		List<Navigation> navList = navService.getNavigationList();
 		model.addAttribute("navList", navList);
+		List<Map<String, Object>> arrList = consService.selectCountYearMonth();
+		model.addAttribute("arrList", arrList);
 		String ip = IPUtils.getIpAddrByRequest(request);
 		log.info("ip:" + ip + "试图访问简历");
 		return "front/resumeCheck";
@@ -118,6 +130,8 @@ public class FrontController  extends BaseController{
 			Navigation nav = navService.getNavigationById(5);
 			model.addAttribute("nav", nav);
 			String ip = IPUtils.getIpAddrByRequest(request);
+			List<Map<String, Object>> arrList = consService.selectCountYearMonth();
+			model.addAttribute("arrList", arrList);
 			log.info("ip:" + ip + "查看了简历");
 			return "front/resume";
 		}
@@ -140,6 +154,8 @@ public class FrontController  extends BaseController{
 		model.addAttribute("nav", nav);
 		PageInfo<Message> pageInfo = messService.getMessageListPage(pageNum);
 		model.addAttribute("mess", pageInfo);
+		List<Map<String, Object>> arrList = consService.selectCountYearMonth();
+		model.addAttribute("arrList", arrList);
 		String ip = IPUtils.getIpAddrByRequest(request);
 		log.info("ip:" + ip + "访问微博留言");
 		model.addAttribute("ip", ip);

@@ -1,6 +1,7 @@
 package com.zhangxy.frontController;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,6 +15,7 @@ import com.zhangxy.base.utils.IPUtils;
 import com.zhangxy.model.Content;
 import com.zhangxy.model.Navigation;
 import com.zhangxy.model.Tags;
+import com.zhangxy.service.ContentService;
 import com.zhangxy.service.IndexService;
 import com.zhangxy.service.NavigationService;
 
@@ -28,9 +30,11 @@ public class IndexControler {
 	private IndexService indexService;
 	@Autowired
 	private NavigationService navService;
+	@Autowired
+	private ContentService consService;
 	
 	@GetMapping({"/","/index"})
-	public String index(String likeName, Integer nid, Integer tid,Integer pageNum, Model model,HttpServletRequest request) {
+	public String index(String likeName,String time, Integer nid, Integer tid,Integer pageNum, Model model,HttpServletRequest request) {
 		String ip = IPUtils.getIpAddrByRequest(request);
 		log.info("ip:" + ip + "访问博客");
 		if(StringUtil.isNotBlank(likeName)) {
@@ -46,6 +50,13 @@ public class IndexControler {
 			Navigation nav = new Navigation();
 			nav.setName(tag.getName());
 			model.addAttribute("nav", nav);
+		} else if(StringUtil.isNotBlank(time)){
+			nid = nid == null? 1 : nid;
+			PageInfo<Content>  contentList = indexService.getContentListBytime(pageNum,time);
+			Navigation nav = navService.getNavigationById(nid);
+			nav.setName(time);
+			model.addAttribute("nav", nav);
+			model.addAttribute("conList", contentList);
 		} else {
 			nid = nid == null? 1 : nid;
 			PageInfo<Content>  contentList = indexService.getContentList(pageNum);
@@ -54,6 +65,8 @@ public class IndexControler {
 			model.addAttribute("nav", nav);
 			model.addAttribute("conList", contentList);
 		}
+		List<Map<String, Object>> arrList = consService.selectCountYearMonth();
+		model.addAttribute("arrList", arrList);
 		List<Tags> tagList = indexService.getTagList();
 		model.addAttribute("tagList", tagList);
 		List<Navigation> navList = navService.getNavigationList();

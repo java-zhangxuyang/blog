@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="/css/front/index.css"/>
 <link rel="stylesheet" href="/css/kjzt/style.css"/>
 
-<title>欢迎来到Young微博</title>
+<title>欢迎来到Young博客</title>
 </head>
 <body>
 	<div><!-- 整体div -->
@@ -101,11 +101,20 @@
 				</div>
 			</div>
 			<div class="right col-md-3"><!-- 右边 -->
-				<div onload="show()" id = "show_time" class="screen-time">
-				    <script>
-				    	setInterval("show_time.innerHTML=new Date().toLocaleString()+' 星期'+'日一二三四五六'.charAt(new Date().getDay());",1000);
-					</script>
-			    </div>
+
+			    <div class="myProfile"><!-- 右下 -->
+					<div class="xinxi">
+					<h2>归档</h2>
+					<ul class="list-group">
+						<%for(arr in arrList){%><a href="/index?time=${arr.time}">
+						    <li class="list-group-item">
+						        <span class="badge" style="line-height:30px;">${arr.count}篇</span>
+						        ${arr.time}
+						    </li></a>
+						<%}%>
+					</ul>
+					</div>
+				</div>
 				<div class="zxytags"><!-- 右上 -->
 					<h2>常用标签组</h2>
 					<ul class="nav nav-pills nav-stacked">
@@ -118,33 +127,6 @@
 							</li>
 						<%}%>
 					</ul>
-				</div>
-				<div class="myProfile"><!-- 右下 -->
-					<div class="xinxi">
-						<table class="table table-striped">
-						  <caption>博主简介</caption>
-						  <tbody>
-						    <tr><td colspan="2">姓名：</td><td colspan="3">张旭阳</td></tr>
-						    <tr><td>英文名：</td><td colspan="3">Young</td></tr>
-						    <tr><td>出生：</td><td colspan="3">1994.8.15</td></tr>
-						    <tr><td>籍贯：</td><td colspan="3">河南郑州</td></tr>
-						    <tr><td>岗位：</td><td colspan="3">Java开发</td></tr>
-						    <tr><td>工龄：</td><td colspan="3">3年</td></tr>
-						    <tr><td>Q Q：</td><td colspan="3">994134665</td></tr>
-						    <tr><td>微信：</td><td colspan="3">qingxin994</td></tr>
-						  </tbody>
-						</table>
-						<!-- <ul class="list-group">
-						    <li class="list-group-item"></li>
-						    <li class="list-group-item"></li>
-						    <li class="list-group-item"></li>
-						    <li class="list-group-item"></li>
-						    <li class="list-group-item"></li>
-						    <li class="list-group-item"></li>
-						    <li class="list-group-item"></li>
-						    <li class="list-group-item"></li>
-						</ul> -->
-					</div>
 				</div>
 			</div>
 			<div class="left col-md-1">

@@ -24,7 +24,7 @@
 	min-height: 1500px;
 }
 .content > div > .topic{
-	height: 100px;
+	min-height: 110px;
 	margin-top:20px;
 	border-bottom: 2px dashed;
     border-image: -webkit-linear-gradient( #5CD1FD, #C86DD7) 30 30;
@@ -32,7 +32,12 @@
     border-image: linear-gradient(to bottom right, #5CD1FD, #C86DD7) 10 10;
 }
 .content > div > .topic > span{
-	padding-right: 30px;
+	padding-right: 40px;
+}
+.content > div > .topic > h1{
+	white-space: nowrap;
+	 overflow: hidden;
+	 text-overflow: ellipsis;
 }
 
 .content > div > .fenye{
@@ -61,8 +66,6 @@ h2{
 	font-size: 30px;
 	margin-left: 35px;
 	line-height: 40px;
-/* 	border: 1px #1A7DA8 solid; */
-	border: 2px #000 solid;
 }
 
 .footer{
@@ -80,5 +83,24 @@ h2{
 }
 .table > tbody > tr >td:nth-child(2) {
 	text-align: left;
+}
+.right > .bjtz{
+    height: 150px;
+}
+.right > .bjtz::after{
+    content:"";
+	display:block;
+	position:absolute;
+	left:0px;
+	top:0px;
+	width:100%;
+	height:100%;
+	background: url("/image/zft.png") no-repeat;
+	/* 伪类3D旋转 */
+	animation :myfirst 7s infinite linear;
+}
+@keyframes myfirst{
+    0%{transform:rotate(0deg);}
+    100%{transform:rotate(360deg);}
 }
 	

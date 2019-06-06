@@ -8,6 +8,7 @@
 <script src="/js/admin/index.js" type="text/javascript" charset="utf-8"></script>
 <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css"/>
 <link rel="stylesheet" href="/css/admin/index.css"/>
+<link rel="stylesheet" href="/css/kjzt/style.css"/>
 <title>管理控制台</title>
 </head>
 <body>
@@ -19,6 +20,13 @@
        </div>
        <div class="collapse navbar-collapse">
            <ul class="nav navbar-nav navbar-right">
+               <li>
+                  <div onload="show()" id = "show_time" class="screen-time">
+				    <script>
+				    	setInterval("show_time.innerHTML=new Date().toLocaleString()+' 星期'+'日一二三四五六'.charAt(new Date().getDay());",1000);
+					</script>
+			    </div>
+               </li>
                <li role="presentation">
                    <a href="javascript:return false;">当前用户：<span class="badge">${user.userName}</span></a>
                </li>

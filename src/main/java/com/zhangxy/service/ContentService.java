@@ -3,6 +3,7 @@ package com.zhangxy.service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,7 +35,7 @@ public class ContentService {
 	 * 获取最热10篇文章 后端主页显示
 	 */
 	public List<Content> getConHotList() {
-		PageHelper.startPage(1, 10);
+		PageHelper.startPage(1, 9);
 		ContentExample example = new ContentExample();
 		example.setOrderByClause(" look desc, time desc");
 		List<Content> list = conMapper.selectByExample(example);
@@ -111,6 +112,13 @@ public class ContentService {
 	
 	public List<Integer> selectCountMonth(){
 		return cenmMapper.selectCountMonth();
+	}
+	
+	public List<Map<String, Object>> selectCountYearMonth(){
+		List<Map<String, Object>> list = cenmMapper.selectCountYearMonth();
+		PageHelper.startPage(1, 12);
+		PageInfo<Map<String, Object>> pageInfo = new PageInfo<>(list);
+		return pageInfo.getList();
 	}
 	
 	

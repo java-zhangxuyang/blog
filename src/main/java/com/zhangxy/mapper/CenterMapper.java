@@ -1,12 +1,14 @@
 package com.zhangxy.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import com.zhangxy.model.Content;
 import com.zhangxy.model.center;
 
 @Mapper
@@ -29,5 +31,12 @@ public interface CenterMapper {
 			"SELECT MONTH(c.time) as `month`,count(1) as count FROM content c WHERE YEAR(c.time)=\"2019\" GROUP BY MONTH(c.time)\n" + 
 			") c on m.`month` = c.`month` ORDER BY m.`month` ")
 	List<Integer> selectCountMonth();
+	
+	@Select("SELECT DATE_FORMAT(time,'%Y-%m') time,count(0) count \n" + 
+			"from content GROUP BY DATE_FORMAT(time,'%Y-%m')")
+	List<Map<String, Object>> selectCountYearMonth();
+
+	@Select("SELECT * FROM content WHERE YEAR(time)=#{year} AND MONTH(time)=#{month}")
+	List<Content> ContentListBytime(int year, int month);
 	
 }

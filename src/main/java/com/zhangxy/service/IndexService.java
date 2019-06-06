@@ -18,6 +18,8 @@ import com.zhangxy.model.Tags;
 import com.zhangxy.model.TagsExample;
 import com.zhangxy.model.center;
 
+import jodd.datetime.JDateTime;
+
 @Service
 public class IndexService {
 	
@@ -68,7 +70,29 @@ public class IndexService {
 		List<Content> resule = pageInfo.getList();
 		for (Content content : resule) {
 			List<String> tagList = new ArrayList<>();
-			List<center> tidList = centerMapper.getTagListByTid(content.getId());
+			List<center> tidList = centerMapper.getTagListByCid(content.getId());
+			if(!tidList.isEmpty() && tidList.size() > 0) {
+				for (center cen : tidList) {
+					Tags tag = tagsMapper.selectByPrimaryKey(cen.getTid());
+					if(null != tag) {
+						tagList.add(tag.getName());
+					}
+				}
+			}
+			content.setTagList(tagList);
+		}
+		return pageInfo;
+	}
+	public PageInfo<Content> getContentListBytime(Integer pageNum,String time){
+		pageNum = pageNum == null ? 1 :pageNum;
+		PageHelper.startPage(pageNum, 10);
+		JDateTime date = new JDateTime(time);
+		List<Content> list = centerMapper.ContentListBytime(date.getYear(),date.getMonth());
+		PageInfo<Content> pageInfo = new PageInfo<>(list);
+		List<Content> resule = pageInfo.getList();
+		for (Content content : resule) {
+			List<String> tagList = new ArrayList<>();
+			List<center> tidList = centerMapper.getTagListByCid(content.getId());
 			if(!tidList.isEmpty() && tidList.size() > 0) {
 				for (center cen : tidList) {
 					Tags tag = tagsMapper.selectByPrimaryKey(cen.getTid());
