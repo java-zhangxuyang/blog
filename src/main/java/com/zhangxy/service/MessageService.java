@@ -30,4 +30,9 @@ public class MessageService {
 		mess.setTime(new Date());
 		return messMapper.insertSelective(mess);
 	}
+
+	public Integer delMess(Integer id) {
+		return messMapper.deleteByPrimaryKey(id);
+	}
+
 }

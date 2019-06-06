@@ -13,8 +13,12 @@ $(function(){
             url: "/admin/loginOut",
             dataType: "json",
             success: function(data){
-                	layer.msg("注销成功");
-                	window.location.href="/admin"; 
+	            	layer.msg('注销成功',{
+	                    time:1000,
+	                    end:function () {
+	                    	window.location.href="/admin"; 
+	                    }
+	            	})
                  },
             error:function(){
 	            	layer.msg("网络超时，请重试！");

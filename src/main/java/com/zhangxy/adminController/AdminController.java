@@ -15,11 +15,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageInfo;
 import com.zhangxy.model.Content;
+import com.zhangxy.model.Message;
 import com.zhangxy.model.Navigation;
 import com.zhangxy.model.Tags;
 import com.zhangxy.model.User;
 import com.zhangxy.service.ContentService;
 import com.zhangxy.service.LoginSerivce;
+import com.zhangxy.service.MessageService;
 import com.zhangxy.service.NavigationService;
 import com.zhangxy.service.TagsService;
 
@@ -35,6 +37,8 @@ public class AdminController {
 	private TagsService tagService;
 	@Autowired
 	private LoginSerivce loginSerivce;
+	@Autowired
+	private MessageService mesService;
 	
 	/**
 	 * 后端管理主页
@@ -208,6 +212,25 @@ public class AdminController {
 			navService.addNav(nav);
 		}
 		return "redirect:/admin/navList";
+	}
+	/**
+	 * TO 后端留言列表页面
+	 */
+	@GetMapping("/messList")
+	public String messList(Integer pageNum, Model model,HttpServletRequest request) {
+		PageInfo<Message> info = mesService.getMessageListPage(pageNum);
+		model.addAttribute("info", info);
+		return "/admin/iframe/messList";
+	}
+	
+	/**
+	 * 根据id
+	 * 删除留言
+	 */
+	@PostMapping("delMess")
+	@ResponseBody
+	public Integer delMess(Integer id) {
+		return mesService.delMess(id);
 	}
 	
 
