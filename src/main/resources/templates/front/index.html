@@ -145,7 +145,7 @@
 		<div class="fcol-md-12 clear" style="height:100px; margin-top: 40px;">
 			<div class="col-md-1"></div>
 			<div class="footer col-md-10">
-				<p>Young's blog : www.youngzhang.cn</p>
+				<p>Young's blog : www.youngzhang.cn &copy; <span id="yearing"></span></p>
 				<p>本站所有内容如有侵权行为，请联系本人删除！</p>
 				<p>本博客由本人自主开发使用，维权必究。</p>
 			</div>
@@ -154,4 +154,11 @@
 		</div>
 	</div>
 </body>
+<script type="text/javascript">
+$(function(){
+	var myDate = new Date();
+	var year = myDate.getFullYear(); //获取完整的年份(4位,1970-????)
+ 	$("#yearing").html(year);
+})
+</script>
 </html>
