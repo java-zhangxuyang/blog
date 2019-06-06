@@ -27,7 +27,7 @@
 	width: 90%;
 }
 .mess{
-	height: 170px;
+	height: 190px;
 	border-bottom: 1px #000 dashed;
 	margin-bottom: 10px;
 }
@@ -201,15 +201,15 @@
 	</div>
 </body>
 <script type="text/javascript">
-var E = window.wangEditor
-// 或者 var editor = new E( document.getElementById('editor') )
-var editor = new E('#editor')
-editor.customConfig.onchange = function (html) {
-    // 监控变化，同步更新到 textarea
-    $('#content').val(html)
-}
-editor.create()
-// 初始化 textarea 的值
-$('#content').val(editor.txt.html())
+	var E = window.wangEditor
+	// 或者 var editor = new E( document.getElementById('editor') )
+	var editor = new E('#editor')
+	editor.customConfig.onchange = function (html) {
+	    // 监控变化，同步更新到 textarea
+	    $('#content').val(html)
+	}
+	editor.create()
+	// 初始化 textarea 的值
+	$('#content').val(editor.txt.html())
 </script>
 </html>

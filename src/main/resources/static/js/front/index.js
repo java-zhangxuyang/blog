@@ -36,19 +36,30 @@ $(function(){
 	})
 	$("#massage").click(function(){
 		var name = $("#ipname").val();
-		if(name==null || name==""){
-			layer.alert('请输入昵称！', {
-			  skin: 'layui-layer-molv' //样式类名
-			  ,closeBtn: 0
+		var content = $("#content").val();
+		if(content==null || content==""){
+			layer.alert('请输入留言内容！', {
+				skin: 'layui-layer-molv' //样式类名
+					,closeBtn: 0
 			}, function(){
 				layer.close();
 			});
 			return;
 		}
+		if(name==null || name==""){
+			layer.alert('请输入昵称！', {
+				skin: 'layui-layer-molv' //样式类名
+					,closeBtn: 0
+			}, function(){
+				layer.close();
+			});
+			return;
+			return;
+		}
 		$.ajax({
 			type: "POST",
 			url: "/front/addmessage",
-			data: {massage:$("#content").val(),name:name,ip:$("#ip").val()},
+			data: {massage:content,name:name,ip:$("#ip").val()},
 			dataType: "json",
 			success: function(data){
 				if(data == 0){
