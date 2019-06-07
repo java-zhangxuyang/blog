@@ -11,13 +11,10 @@
 <title></title>
 </head>
 <body>
-	<div class="but">
-		<a href="/admin/editOrAddView" class="btn btn-info btn-lg">
-          <span class="glyphicon glyphicon-plus"></span> 写文章
-        </a>
-	</div>
 	<table class="table table-striped">
-	  <caption>文章管理列表</caption>
+	  <caption>文章管理列表<a href="/admin/editOrAddView" class="btn btn-info" style="float: right; margin-right: 100px;">
+          <span class="glyphicon glyphicon-plus"></span> 写文章
+        </a></caption>
 	  <thead>
 	    <tr>
 	      <th>序号</th>
@@ -33,16 +30,16 @@
 	  <tbody>
 	  	<%for(con in info.list){%>
 		    <tr>
-		      <td style="line-height: 45px;">${conLP.index}</td>
-		      <td style="line-height: 45px;">${con.title}</td>
-		      <td style="line-height: 45px;">${con.time,'yyyy-MM-dd HH:mm:ss'}</td>
-		      <td style="line-height: 45px;">${con.top?"是":"否"}</td>
-		      <td style="line-height: 45px;">${con.look}</td>
-		      <td style="line-height: 45px;"><a href="${con.url}"><button type="button" class="btn btn-link">点击浏览</button></a></td>
-		      <td style="line-height: 45px;">${con.nav}</td>
-		      <td style="line-height: 45px;">
-		      	<button type="button" class="edit btn-lg btn-primary" value="${con.id}"><span class="glyphicon glyphicon-edit"></span> &nbsp;编辑</button>
-		      	<button type="button" class="del btn-lg btn-danger" value="${con.id}"><span class="glyphicon glyphicon-remove"></span> &nbsp;删除</button>
+		      <td style="line-height: 35px;">${conLP.index}</td>
+		      <td style="line-height: 35px;width: 20%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">${con.title}</td>
+		      <td style="line-height: 35px;">${con.time,'yyyy-MM-dd HH:mm:ss'}</td>
+		      <td style="line-height: 35px;">${con.top?"是":"否"}</td>
+		      <td style="line-height: 35px;">${con.look}</td>
+		      <td style="line-height: 35px;"><a href="${con.url}"><button type="button" class="btn btn-link">点击浏览</button></a></td>
+		      <td style="line-height: 35px;">${con.nav}</td>
+		      <td style="line-height: 35px;">
+		      	<button type="button" class="edit btn btn-primary" value="${con.id}"><span class="glyphicon glyphicon-edit"></span> &nbsp;编辑</button>
+		      	<button type="button" class="del btn btn-danger" value="${con.id}"><span class="glyphicon glyphicon-remove"></span> &nbsp;删除</button>
 		      </td>
 		    </tr>
 		<%}%>

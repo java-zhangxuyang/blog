@@ -10,13 +10,10 @@
 <title></title>
 </head>
 <body>
-	<div class="but">
-		<a href="/admin/editOrAddTag" class="btn btn-info btn-lg">
-          <span class="glyphicon glyphicon-plus"></span> 添加标签
-        </a>
-	</div>
 	<table class="table table-striped">
-	  <caption>标签管理列表</caption>
+	  <caption>标签管理列表<a href="/admin/editOrAddTag" class="btn btn-info" style="float: right; margin-right: 100px;">
+          <span class="glyphicon glyphicon-plus"></span> 添加标签
+        </a></caption>
 	  <thead>
 	    <tr>
 	      <th width="10%">序号</th>
@@ -26,18 +23,40 @@
 	    </tr>
 	  </thead>
 	  <tbody>
-	  	<%for(tag in list){%>
+	  	<%for(tag in info.list){%>
 		    <tr>
 		      <td style="line-height: 45px;">${tagLP.index}</td>
 		      <td style="line-height: 45px;">${tag.name}</td>
 		      <td style="line-height: 45px;">${tag.count}</td>
 		      <td style="line-height: 45px;">
-		      	<button type="button" class="edit btn-lg btn-primary" value="${tag.id}"><span class="glyphicon glyphicon-edit"></span> &nbsp;编辑</button>
-		      	<button type="button" class="del btn-lg btn-danger" value="${tag.id}"><span class="glyphicon glyphicon-remove"></span> &nbsp;删除</button>
+		      	<button type="button" class="edit btn btn-primary" value="${tag.id}"><span class="glyphicon glyphicon-edit"></span> &nbsp;编辑</button>
+		      	<button type="button" class="del btn btn-danger" value="${tag.id}"><span class="glyphicon glyphicon-remove"></span> &nbsp;删除</button>
 		      </td>
 		    </tr>
 		<%}%>
 	  </tbody>
+	  <tfoot>
+	  	<tr>
+	  		<td colspan = "8"><div class="fenye">
+					<ul class="pagination">
+						<%if(info.isHasPreviousPage){%>
+						    <li><a href="/admin/contentList?pageNum=${info.prePage}">&laquo;</a></li>
+						<%}%>
+						<%
+						for(var i = 1;i<=info.pages;i++){%>
+						    <li 
+						    	<%if(i == info.pageNum){%>
+						    		class="active"
+								<%}%>
+						    ><a href="/admin/contentList?pageNum=${i}">${i}</a></li>
+						<%}%>
+						<%if(info.isHasNextPage){%>
+						    <li><a href="/admin/contentList?pageNum=${info.nextPage}">&raquo;</a></li>
+						<%}%>
+					</ul>
+				</div></td>
+	  	</tr>
+	  </tfoot>
 	</table>
 </body>
 <script type="text/javascript">

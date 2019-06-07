@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.zhangxy.mapper.TagsMapper;
 import com.zhangxy.model.Tags;
 import com.zhangxy.model.TagsExample;
@@ -20,6 +22,15 @@ public class TagsService {
 		example.setOrderByClause(" count desc");
 		List<Tags> list = tagsMapper.selectByExample(example);
 		return list;
+	}
+	public PageInfo<Tags> getTagsListByPage(Integer pageNum) {
+		pageNum = pageNum == null ? 1 : pageNum;
+		PageHelper.startPage(pageNum, 10);
+		TagsExample example = new TagsExample();
+		example.setOrderByClause(" count desc");
+		List<Tags> list = tagsMapper.selectByExample(example);
+		PageInfo<Tags> pageInfo = new PageInfo<>(list);
+		return pageInfo;
 	}
 	public Tags getTagsById(Integer id) {
 		return tagsMapper.selectByPrimaryKey(id);

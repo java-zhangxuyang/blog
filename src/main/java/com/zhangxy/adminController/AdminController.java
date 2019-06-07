@@ -169,9 +169,9 @@ public class AdminController {
 	 * TO 后端管理文章列表页面
 	 */
 	@GetMapping("/tagsList")
-	public String tagsList(Model model,HttpServletRequest request) {
-		List<Tags> list = tagService.getTagsList();
-		model.addAttribute("list", list);
+	public String tagsList(Integer pageNum,Model model,HttpServletRequest request) {
+		PageInfo<Tags> pageInfo = tagService.getTagsListByPage(pageNum);
+		model.addAttribute("info", pageInfo);
 		return "/admin/iframe/tagsList";
 	}
 	/**
@@ -218,7 +218,7 @@ public class AdminController {
 	 */
 	@GetMapping("/messList")
 	public String messList(Integer pageNum, Model model,HttpServletRequest request) {
-		PageInfo<Message> info = mesService.getMessageListPage(pageNum);
+		PageInfo<Message> info = mesService.getMessageListPage10(pageNum);
 		model.addAttribute("info", info);
 		return "/admin/iframe/messList";
 	}

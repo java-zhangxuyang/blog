@@ -20,8 +20,8 @@ table{
 
 table > caption{
 	text-align: center;
-	font-size: 30px;
-	height: 50px;
+	font-size: 25px;
+	height: 40px;
 }
 table > thead > tr >th {
 	height: 50px;
