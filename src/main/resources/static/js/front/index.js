@@ -25,7 +25,7 @@ $(function(){
                     if(data == 0){
                     	layer.msg("密码错误");
                     }else if(data == 1){
-                    	layer.alert('个人简历，请勿盗用！', {
+                    	layer.alert('<center>个人简历，请勿盗用！</center>', {
 							skin: 'layui-layer-molv' //样式类名
 								,closeBtn: 0
 						}, function(){
