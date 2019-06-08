@@ -6,6 +6,10 @@ spring:
      static-path-pattern: /**
      favicon:
         enabled: true   #网站默认图标
+   servlet:
+    multipart:
+      max-file-size: 100Mb
+      max-request-size: 100Mb
    thymeleaf:
           prefix: classpath:/templates/
           suffix: .html
@@ -44,3 +48,13 @@ pagehelper:
   supportMethodsArguments: true
   params: count=countSql
   returnPageInfo: check
+  
+#ftp相关配置
+FTP.ADDRESS: www.youngzhang.cn
+FTP.PORT: 21
+FTP.USERNAME: ftpuser
+FTP.PASSWORD: ftpuser
+FTP.BASEPATH: /home/www/image
+#图片服务器相关配置
+IMAGE.BASE.URL: http://www.youngzhang.cn:8999/image
+  

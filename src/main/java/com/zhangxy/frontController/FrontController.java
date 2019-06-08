@@ -129,9 +129,9 @@ public class FrontController  extends BaseController{
 			model.addAttribute("navList", navList);
 			Navigation nav = navService.getNavigationById(5);
 			model.addAttribute("nav", nav);
-			String ip = IPUtils.getIpAddrByRequest(request);
 			List<Map<String, Object>> arrList = consService.selectCountYearMonth();
 			model.addAttribute("arrList", arrList);
+			String ip = IPUtils.getIpAddrByRequest(request);
 			log.info("ip:" + ip + "查看了简历");
 			return "front/resume";
 		}

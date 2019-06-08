@@ -28,17 +28,18 @@
 .mess{
 	min-height: 165px;
 	border-bottom: 1px #000 dashed;
-	margin-bottom: 10px;
 }
 .name{
 	border-right: 1px #000 dashed;
 	text-align: center;
-	height: 100%;
+	min-height: 165px;
+	line-height: 30px;
+	padding-top: 10px;
 }
 .conmes{
+	min-height: 165px;
 	padding-left:30px;
 	padding-top: 10px;
-	overflow: hidden;
 }
 .form-control{
 	width: 95%;
@@ -121,11 +122,20 @@
 				  	<button id="massage" class="btn btn-primary">留言</button>
 				  </div>
 				</div>
+				<div class="mess">
+					<div class="name col-md-3">
+						<img alt="默认头像" src="http://www.youngzhang.cn:8999/image/bozhu.jpeg" width="60%" height="50%"><br/>
+					Young<br/>
+					</div>
+					<div class="conmes col-md-9"><p>&nbsp; &nbsp; &nbsp; &nbsp; 
+					感谢大家的留言支持。如有朋友留言需要回复，请留下您的邮箱。或者直接发送到我的邮箱：zxy163_work@163.com
+					<br></p></div>
+				</div>
 				<%for(mes in mess.list){%>
 					<div class="mess">
 						<div class="name col-md-3">
-							<img alt="默认头像" src="/image/mrtx.jpg" width="50%" height="50%"><br/>
-						${mes.name}<br/>${mes.time,'yyyy-MM-dd HH:mm:ss'}
+							<img alt="默认头像" src="http://www.youngzhang.cn:8999/image/moren.jpeg" width="60%" height="50%"><br/>
+						${mes.name}<br/>${mes.time,'yyyy-MM-dd'}
 						</div>
 						<div class="conmes col-md-9">${mes.massage}</div>
 					</div>
