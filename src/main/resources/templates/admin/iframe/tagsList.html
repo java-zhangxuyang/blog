@@ -40,7 +40,7 @@
 	  		<td colspan = "8"><div class="fenye">
 					<ul class="pagination">
 						<%if(info.isHasPreviousPage){%>
-						    <li><a href="/admin/contentList?pageNum=${info.prePage}">&laquo;</a></li>
+						    <li><a href="/admin/tagsList?pageNum=${info.prePage}">&laquo;</a></li>
 						<%}%>
 						<%
 						for(var i = 1;i<=info.pages;i++){%>
@@ -48,10 +48,10 @@
 						    	<%if(i == info.pageNum){%>
 						    		class="active"
 								<%}%>
-						    ><a href="/admin/contentList?pageNum=${i}">${i}</a></li>
+						    ><a href="/admin/tagsList?pageNum=${i}">${i}</a></li>
 						<%}%>
 						<%if(info.isHasNextPage){%>
-						    <li><a href="/admin/contentList?pageNum=${info.nextPage}">&raquo;</a></li>
+						    <li><a href="/admin/tagsList?pageNum=${info.nextPage}">&raquo;</a></li>
 						<%}%>
 					</ul>
 				</div></td>
