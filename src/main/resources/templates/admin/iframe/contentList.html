@@ -18,7 +18,7 @@
 	  <thead>
 	    <tr>
 	      <th>序号</th>
-	      <th>标题</th>
+	      <th style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">标题</th>
 	      <th>发布时间</th>
 	      <th>置顶</th>
 	      <th>点击</th>
@@ -31,11 +31,11 @@
 	  	<%for(con in info.list){%>
 		    <tr>
 		      <td style="line-height: 35px;">${conLP.index}</td>
-		      <td style="line-height: 35px;width: 20%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">${con.title}</td>
+		      <td style="line-height: 35px;"><div style="width: 95%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">${con.title}</div></td>
 		      <td style="line-height: 35px;">${con.time,'yyyy-MM-dd HH:mm:ss'}</td>
 		      <td style="line-height: 35px;">${con.top?"是":"否"}</td>
 		      <td style="line-height: 35px;">${con.look}</td>
-		      <td style="line-height: 35px;"><a href="${con.url}"><button type="button" class="btn btn-link">点击浏览</button></a></td>
+		      <td style="line-height: 35px;"><a href="/detailed?id=${con.id}"><button type="button" class="btn btn-link">点击浏览</button></a></td>
 		      <td style="line-height: 35px;">${con.nav}</td>
 		      <td style="line-height: 35px;">
 		      	<button type="button" class="edit btn btn-primary" value="${con.id}"><span class="glyphicon glyphicon-edit"></span> &nbsp;编辑</button>

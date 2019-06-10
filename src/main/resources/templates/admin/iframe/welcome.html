@@ -9,16 +9,16 @@
 <link rel="stylesheet" href="/css/front/general.css"/>
 <link rel="stylesheet" href="/css/admin/welcome.css"/>
 </head>
-<body style="height: 1000px;">
+<body style="height: 650px;">
 	<div class="boby">
 		<div class="topLeft fl">
 			<h3>点击热文</h3>
 			<ul class="nav nav-pills nav-stacked">
 				<%for(con in conList){%>
 					<li>
-						<a href="">
+						<a href="/detailed?id=${con.id}" style="padding: 5px 3px 3px 8px;">
 							<span class="badge pull-right">${con.look}</span>
-							${conLP.index + "、" + con.title}
+							<div style="width: 90%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">${conLP.index + "、" + con.title}</div>
 						</a>
 					</li>
 				<%}%>
@@ -56,9 +56,19 @@
 		        </div>
 		    </div>
 		</div>
-		<div class="bottom clear">
+		<div class="bottom" style="margin-right: 10px;">
 			<h3>2019学习情况</h3>
 			<div id="zxt"></div>
+		</div>
+		<div class="bottom">
+			<h3 style="padding:8px 5px 0px 0px;">最新留言</h3>
+			<ul class="nav nav-pills nav-stacked">
+				<%for(me in mess){%>
+					<li>
+						<div style="width: 90%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">${meLP.index + "、" + me.massage}</div>
+					</li>
+				<%}%>
+			</ul>
 		</div>
 	</div>
 </body>

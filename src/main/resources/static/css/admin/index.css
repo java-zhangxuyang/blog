@@ -29,6 +29,7 @@
  }
  .dropdown-menu>li>a{
      padding: 10px 15px;
+     
  }
 
  /* 主体样式 */
@@ -41,7 +42,7 @@
     font-family: "Microsoft YaHei", sans-serif;
  }
  .pageSidebar{
-    width: 240px;
+    width: 200px;
     height:100%;
     padding-bottom: 30px;
     overflow: auto;
@@ -51,7 +52,7 @@
      width: 5px;
      height: 100%;
      bottom: 0;
-     left: 240px;
+     left: 203px;
      position: absolute; 
      overflow: hidden;
      background-color: #fff;
@@ -59,7 +60,7 @@
  .pageContent{
      height: 100%;
      min-width: 768px;
-     left: 246px;
+     left: 208px;
      top: 0;
      right: 0;
      z-index: 3;

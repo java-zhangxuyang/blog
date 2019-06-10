@@ -44,6 +44,8 @@ public class AdminController {
 	private MessageService mesService;
 	@Autowired
 	private SolrService solrService;
+	@Autowired
+	private MessageService messService;
 	
 	/**
 	 * 后端管理主页
@@ -76,6 +78,8 @@ public class AdminController {
 		model.addAttribute("conList", contentList);
 		List<Integer> list = conService.selectCountMonth();
 		model.addAttribute("data", list);
+		List<Message> messlist = messService.getMessageListPage9();
+		model.addAttribute("mess", messlist);
 		return "/admin/iframe/welcome";
 	}
 	

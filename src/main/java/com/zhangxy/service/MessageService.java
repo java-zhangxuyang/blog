@@ -25,6 +25,12 @@ public class MessageService {
 		PageInfo<Message> pageInfo = new PageInfo<>(list);
 		return pageInfo;
 	}
+	public List<Message> getMessageListPage9(){
+		PageHelper.startPage(1, 9);
+		List<Message> list = messMapper.selectByExample(new MessageExample());
+		PageInfo<Message> pageInfo = new PageInfo<>(list);
+		return pageInfo.getList();
+	}
 	public PageInfo<Message> getMessageListPage10(Integer pageNum){
 		pageNum = pageNum == null ? 1 : pageNum;
 		PageHelper.startPage(pageNum, 10);
