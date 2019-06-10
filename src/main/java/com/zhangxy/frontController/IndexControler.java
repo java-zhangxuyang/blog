@@ -41,6 +41,7 @@ public class IndexControler {
 			PageInfo<Content> contentList = indexService.getSolrContentList(likeName, pageNum);
 			model.addAttribute("conList", contentList);
 			Navigation nav = new Navigation();
+			nav.setId(1);
 			nav.setName(likeName);
 			model.addAttribute("nav", nav);
 		} else if(tid != null) {
@@ -48,12 +49,13 @@ public class IndexControler {
 			PageInfo<Content> contentList = indexService.getTagListById(tid, pageNum);
 			model.addAttribute("conList", contentList);
 			Navigation nav = new Navigation();
+			nav.setId(1);
 			nav.setName(tag.getName());
 			model.addAttribute("nav", nav);
 		} else if(StringUtil.isNotBlank(time)){
-			nid = nid == null? 1 : nid;
 			PageInfo<Content>  contentList = indexService.getContentListBytime(pageNum,time);
-			Navigation nav = navService.getNavigationById(nid);
+			Navigation nav = new Navigation();
+			nav.setId(1);
 			nav.setName(time);
 			model.addAttribute("nav", nav);
 			model.addAttribute("conList", contentList);
