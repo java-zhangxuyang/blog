@@ -24,7 +24,7 @@
 	min-height: 1000px;
 }
 .content > div > .topic{
-	min-height: 90px;
+	min-height: 80px;
 	margin-top:20px;
 	border-bottom: 2px dashed;
     border-image: -webkit-linear-gradient( #5CD1FD, #C86DD7) 30 30;

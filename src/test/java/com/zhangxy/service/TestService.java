@@ -1,22 +1,35 @@
 package com.zhangxy.service;
 
-import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import static org.assertj.core.api.Assertions.contentOf;
 
-import org.apache.commons.lang3.StringUtils;
+import java.io.IOException;
+import java.util.List;
+
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
+import org.apache.solr.client.solrj.SolrServerException;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.util.DigestUtils;
 
-import com.zhangxy.base.utils.FtpUtil;
+import com.zhangxy.model.Content;
 
 import jodd.datetime.JDateTime;
 
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@WebAppConfiguration
 public class TestService {
 
+	@Autowired
+	private SolrService service;
+	@Autowired
+	private ContentService conserService;
+	
 	@Test
 	public void test() {
 		String md5 = "zhangxy" + "199405";
@@ -30,6 +43,17 @@ public class TestService {
 		JDateTime datetime = new JDateTime(strDate);
 		System.out.println(datetime.getYear());
 		System.out.println(datetime.getMonth());
+	}
+	@Test
+	public void testSolr() throws Exception {
+		List<Content> conList = service.querySolr("Java");
+		if(conList!=null&&conList.size()>0) {
+			for (Content content : conList) {
+				System.out.println("ID:"+content.getId()+",title:"+content.getTitle());
+			}
+		}else {
+			System.out.println("查无结果！");
+		}
 	}
 	@Test
 	public void testFTP() {

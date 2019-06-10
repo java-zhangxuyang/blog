@@ -102,6 +102,12 @@
             <artifactId>commons-net</artifactId>
             <version>3.3</version>
         </dependency>
+        <!-- solr -->
+		<dependency>
+            <groupId>org.apache.solr</groupId>
+            <artifactId>solr-solrj</artifactId>
+            <version>7.7.2</version>
+        </dependency>
         <!-- MD5 -->
         <dependency>
             <groupId>org.apache.commons</groupId>

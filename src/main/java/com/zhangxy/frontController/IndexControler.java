@@ -38,7 +38,7 @@ public class IndexControler {
 		String ip = IPUtils.getIpAddrByRequest(request);
 		log.info("ip:" + ip + "访问博客");
 		if(StringUtil.isNotBlank(likeName)) {
-			PageInfo<Content> contentList = indexService.getContentLikeName(likeName, pageNum);
+			PageInfo<Content> contentList = indexService.getSolrContentList(likeName, pageNum);
 			model.addAttribute("conList", contentList);
 			Navigation nav = new Navigation();
 			nav.setName(likeName);

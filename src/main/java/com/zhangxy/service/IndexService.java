@@ -29,6 +29,8 @@ public class IndexService {
 	private CenterMapper centerMapper;
 	@Autowired
 	private TagsMapper tagsMapper;
+	@Autowired
+	private SolrService solrService;
 	
 	/**
 	  * 根据导航栏id获取文章列表  （分页）
@@ -47,7 +49,7 @@ public class IndexService {
 		List<Content> resule = pageInfo.getList();
 		for (Content content : resule) {
 			List<String> tagList = new ArrayList<>();
-			List<center> tidList = centerMapper.getTagListByTid(content.getId());
+			List<center> tidList = centerMapper.getTagListByCid(content.getId());
 			if(!tidList.isEmpty() && tidList.size() > 0) {
 				for (center cen : tidList) {
 					Tags tag = tagsMapper.selectByPrimaryKey(cen.getTid());
@@ -164,7 +166,7 @@ public class IndexService {
 		List<Content> resule = pageInfo.getList();
 		for (Content content : resule) {
 			List<String> tagList = new ArrayList<>();
-			List<center> tidList = centerMapper.getTagListByTid(content.getId());
+			List<center> tidList = centerMapper.getTagListByCid(content.getId());
 			if(!tidList.isEmpty() && tidList.size() > 0) {
 				for (center cen : tidList) {
 					Tags tag = tagsMapper.selectByPrimaryKey(cen.getTid());
@@ -199,6 +201,33 @@ public class IndexService {
 		con.setLook(con.getLook() + 1);
 		contentMapper.updateByPrimaryKeySelective(con);
 		return con;
+	}
+	
+	public PageInfo<Content> getSolrContentList(String likeName,Integer pageNum){
+		pageNum = pageNum == null ? 1 :pageNum;
+		PageHelper.startPage(pageNum, 10);
+		List<Content> conList=new ArrayList<Content>();
+		try {
+			conList = solrService.querySolr(likeName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		PageInfo<Content> pageInfo = new PageInfo<>(conList);
+		List<Content> resule = pageInfo.getList();
+		for (Content content : resule) {
+			List<String> tagList = new ArrayList<>();
+			List<center> tidList = centerMapper.getTagListByCid(content.getId());
+			if(!tidList.isEmpty() && tidList.size() > 0) {
+				for (center cen : tidList) {
+					Tags tag = tagsMapper.selectByPrimaryKey(cen.getTid());
+					if(null != tag) {
+						tagList.add(tag.getName());
+					}
+				}
+			}
+			content.setTagList(tagList);
+		}
+		return pageInfo;
 	}
 
 }

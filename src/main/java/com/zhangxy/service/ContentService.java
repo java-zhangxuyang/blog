@@ -121,5 +121,12 @@ public class ContentService {
 		return pageInfo.getList();
 	}
 	
+	public List<Content> getConListAll() {
+		ContentExample example = new ContentExample();
+		example.setOrderByClause(" look desc, time desc");
+		List<Content> list = conMapper.selectByExample(example);
+		return list;
+	}
+	
 	
 }

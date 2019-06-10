@@ -30,19 +30,32 @@
 	border-bottom: 1px #000 dashed;
 }
 .name{
-	border-right: 1px #000 dashed;
 	text-align: center;
 	min-height: 165px;
 	line-height: 30px;
 	padding-top: 10px;
 }
 .conmes{
+	border-left: 1px #000 dashed;
 	min-height: 165px;
 	padding-left:30px;
 	padding-top: 10px;
+	padding-bottom: 10px;
 }
 .form-control{
 	width: 95%;
+}
+.clearfix:before,
+.clearfix:after {
+    content:"";
+    display:table;
+}
+.clearfix:after {
+    clear:both;
+    overflow:hidden;
+}
+.clearfix {
+    zoom:1;
 }
 </style>
 </head>
@@ -78,7 +91,7 @@
 		<div class="content">
 			<div class="left col-md-1">
 			</div>
-			<div class="left col-md-7"><!-- 内容体 -->
+			<div class="left col-md-10"><!-- 内容体 -->
 				<div id="myCarousel" class="carousel slide" style="margin-bottom: 40px;">
 				    <!-- 轮播（Carousel）指标 -->
 				    <ol class="carousel-indicators">
@@ -123,21 +136,22 @@
 				  </div>
 				</div>
 				<div class="mess">
-					<div class="name col-md-3">
-						<img alt="默认头像" src="http://www.youngzhang.cn:8999/image/bozhu.jpeg" width="60%" height="50%"><br/>
-					Young<br/>
+					<div class="name col-md-2">
+						<img alt="默认头像" src="http://www.youngzhang.cn:8999/image/bozhu.jpeg" width="70%" height="60%"><br/>
+					Young<br/>博主<br/>
 					</div>
-					<div class="conmes col-md-9"><p>&nbsp; &nbsp; &nbsp; &nbsp; 
-					感谢大家的留言支持。如有朋友留言需要回复，请留下您的邮箱。或者直接发送到我的邮箱：zxy163_work@163.com
+					<div class="conmes col-md-10" style="font-size: 24px;line-height: 47px;color: blue;"><p>&nbsp; &nbsp; &nbsp; &nbsp; 
+					感谢大家的留言支持。如有朋友留言需要回复，请留下您的邮箱。或者直接发送到我的邮箱。<br/>
+					&nbsp; &nbsp;邮箱：zxy163_work@163.com  &nbsp; &nbsp;&nbsp; &nbsp;  Q Q : 994134665
 					<br></p></div>
 				</div>
 				<%for(mes in mess.list){%>
-					<div class="mess">
-						<div class="name col-md-3">
+					<div class="mess clearfix">
+						<div class="name col-md-2">
 							<img alt="默认头像" src="http://www.youngzhang.cn:8999/image/moren.jpeg" width="60%" height="50%"><br/>
 						${mes.name}<br/>${mes.time,'yyyy-MM-dd'}
 						</div>
-						<div class="conmes col-md-9">${mes.massage}</div>
+						<div class="conmes col-md-10">${mes.massage}</div>
 					</div>
 				<%}%>
 				<div class="fenye">
@@ -159,8 +173,8 @@
 					</ul>
 				</div>
 			</div>
-			<div class="right col-md-3"><!-- 右边 -->
-			    <div class="myProfile"><!-- 右下 -->
+<!-- 			<div class="right col-md-3">右边
+			    <div class="myProfile">右下
 					<div class="xinxi">
 					<h2>归档</h2>
 					<ul class="list-group">
@@ -173,7 +187,7 @@
 					</ul>
 					</div>
 				</div>
-				<div class="zxytags"><!-- 右上 -->
+				<div class="zxytags">右上
 					<h2>常用标签组</h2>
 					<ul class="nav nav-pills nav-stacked">
 						<%for(tag in tagList){%>
@@ -186,7 +200,7 @@
 						<%}%>
 					</ul>
 				</div>
-			</div>
+			</div> -->
 			<div class="left col-md-1">
 			</div>
 		</div>

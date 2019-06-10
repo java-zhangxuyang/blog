@@ -1,10 +1,12 @@
 package com.zhangxy.adminController;
 
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.solr.client.solrj.SolrServerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +25,7 @@ import com.zhangxy.service.ContentService;
 import com.zhangxy.service.LoginSerivce;
 import com.zhangxy.service.MessageService;
 import com.zhangxy.service.NavigationService;
+import com.zhangxy.service.SolrService;
 import com.zhangxy.service.TagsService;
 
 @Controller
@@ -39,6 +42,8 @@ public class AdminController {
 	private LoginSerivce loginSerivce;
 	@Autowired
 	private MessageService mesService;
+	@Autowired
+	private SolrService solrService;
 	
 	/**
 	 * 后端管理主页
@@ -104,13 +109,18 @@ public class AdminController {
 	}
 	/**
 	 * TO 添加或者修改文章
+	 * @throws IOException 
+	 * @throws SolrServerException 
 	 */
 	@PostMapping("/editOrAddCom")
-	public String editOrAddCom(Content con) {
+	public String editOrAddCom(Content con) throws SolrServerException, IOException {
 		if(null != con.getId()) {
 			conService.updateCom(con);
+			solrService.deleteDocumentById(con.getId());
+			solrService.addDoc(con);
 		}else {
 			conService.addCom(con);
+			solrService.addDoc(con);
 		}
 		return "redirect:/admin/contentList";
 	}
