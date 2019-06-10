@@ -101,7 +101,7 @@
 					<ul class="nav nav-pills nav-stacked">
 						<%for(tag in tagList){%>
 							<li>
-								<a href="/index?">
+								<a href="/index?tid=${tag.id}">
 									<span class="badge pull-right">${tag.count}</span>
 									${tag.name}
 								</a>
