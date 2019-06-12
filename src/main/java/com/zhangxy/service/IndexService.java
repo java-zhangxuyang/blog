@@ -32,6 +32,8 @@ public class IndexService {
 	@Autowired
 	private SolrService solrService;
 	
+	private final String IP = "129.28.195.239";
+	
 	/**
 	  * 根据导航栏id获取文章列表  （分页）
 	 * @param pageNum 页数
@@ -196,10 +198,12 @@ public class IndexService {
 		Content con = contentMapper.selectByPrimaryKey(id);
 		return con;
 	}
-	public Content lookAdd(Integer id) {
+	public Content lookAdd(Integer id,String ip) {
 		Content con = this.getContentById(id);
-		con.setLook(con.getLook() + 1);
-		contentMapper.updateByPrimaryKeySelective(con);
+		if(IP.equals(ip)) {
+			con.setLook(con.getLook() + 1);
+			contentMapper.updateByPrimaryKeySelective(con);
+		}
 		return con;
 	}
 	

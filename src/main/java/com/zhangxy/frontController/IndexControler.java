@@ -78,15 +78,15 @@ public class IndexControler {
 	
 	@GetMapping("/detailed")
 	public String goDetailed(Model model,Integer id,HttpServletRequest request) {
+		String ip = IPUtils.getIpAddrByRequest(request);
 		List<Tags> tagList = indexService.getTagList();
 		model.addAttribute("tagList", tagList);
 		List<Navigation> navList = navService.getNavigationList();
 		model.addAttribute("navList", navList);
-		Content con = indexService.lookAdd(id);
+		Content con = indexService.lookAdd(id,ip);
 		model.addAttribute("con", con);
 		List<Map<String, Object>> arrList = consService.selectCountYearMonth();
 		model.addAttribute("arrList", arrList);
-		String ip = IPUtils.getIpAddrByRequest(request);
 		log.info("ip:" + ip + "查看了"+con.getTitle());
 		return "front/content";
 	}
