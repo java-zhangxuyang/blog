@@ -1,7 +1,6 @@
 package com.zhangxy.service;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +18,7 @@ import com.zhangxy.model.TagsExample;
 import com.zhangxy.model.center;
 
 import jodd.datetime.JDateTime;
+import jodd.util.StringUtil;
 
 @Service
 public class IndexService {
@@ -31,8 +31,6 @@ public class IndexService {
 	private TagsMapper tagsMapper;
 	@Autowired
 	private SolrService solrService;
-	
-	private final String IP = "129.28.195.239";
 	
 	/**
 	  * 根据导航栏id获取文章列表  （分页）
@@ -198,9 +196,9 @@ public class IndexService {
 		Content con = contentMapper.selectByPrimaryKey(id);
 		return con;
 	}
-	public Content lookAdd(Integer id,String ip) {
+	public Content lookAdd(Integer id, String admin) {
 		Content con = this.getContentById(id);
-		if(IP.equals(ip)) {
+		if(StringUtil.isBlank(admin)) {
 			con.setLook(con.getLook() + 1);
 			contentMapper.updateByPrimaryKeySelective(con);
 		}

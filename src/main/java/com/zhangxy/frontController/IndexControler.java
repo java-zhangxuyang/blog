@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.github.pagehelper.PageInfo;
+import com.zhangxy.base.controler.BaseController;
 import com.zhangxy.base.utils.IPUtils;
 import com.zhangxy.model.Content;
 import com.zhangxy.model.Navigation;
@@ -24,7 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-public class IndexControler {
+public class IndexControler extends BaseController {
 	
 	@Autowired
 	private IndexService indexService;
@@ -77,13 +78,21 @@ public class IndexControler {
 	}
 	
 	@GetMapping("/detailed")
-	public String goDetailed(Model model,Integer id,HttpServletRequest request) {
+	public String goDetailed(Model model,Integer id,String admin ,HttpServletRequest request) {
 		String ip = IPUtils.getIpAddrByRequest(request);
 		List<Tags> tagList = indexService.getTagList();
 		model.addAttribute("tagList", tagList);
 		List<Navigation> navList = navService.getNavigationList();
 		model.addAttribute("navList", navList);
-		Content con = indexService.lookAdd(id,ip);
+		if(StringUtil.isBlank(admin)) {
+			Integer sign = cache.get("look_content_"+id);
+			if(sign != null) {
+				admin = "admin";
+			}else {
+				cache.set("look_content_"+id, 1, 10 * 60);
+			}
+		}
+		Content con = indexService.lookAdd(id,admin);
 		model.addAttribute("con", con);
 		List<Map<String, Object>> arrList = consService.selectCountYearMonth();
 		model.addAttribute("arrList", arrList);
