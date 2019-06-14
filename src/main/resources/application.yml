@@ -55,7 +55,7 @@ pagehelper:
 FTP.ADDRESS: www.youngzhang.cn
 FTP.PORT: 21
 FTP.USERNAME: ftpuser
-FTP.PASSWORD: ftpuser
+FTP.PASSWORD: devroot
 FTP.BASEPATH: /home/www/image
 #图片服务器相关配置
 IMAGE.BASE.URL: http://www.youngzhang.cn:8999/image
