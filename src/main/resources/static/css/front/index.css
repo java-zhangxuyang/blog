@@ -40,6 +40,7 @@
     text-overflow: ellipsis;
     font-size: 24px;
     line-height: 30px;
+    width: 90%;
 }
 
 .content > div > .fenye{
