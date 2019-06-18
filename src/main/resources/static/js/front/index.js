@@ -2,6 +2,11 @@
  * 
  */
 $(function(){
+	
+	var myDate = new Date();
+	var year = myDate.getFullYear(); //获取完整的年份(4位,1970-????)
+ 	$("#yearing").html(year);
+	
 	$("ul li").click(function(){
 	    $(this).addClass("active").siblings().removeClass("active");
 	})
