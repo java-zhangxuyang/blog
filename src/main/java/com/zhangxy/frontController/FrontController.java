@@ -41,6 +41,13 @@ public class FrontController  extends BaseController{
 	@Autowired
 	private ContentService consService;
 	
+	/**
+	 * @param pageNum 分页页数
+	 * @param nid 类别id
+	 * @param model
+	 * @param request
+	 * 分享页面
+	 */
 	@GetMapping("/share")
 	public String share(Integer pageNum, Integer nid, Model model,HttpServletRequest request) {
 		nid = nid == null ? 2 : nid;
@@ -59,6 +66,13 @@ public class FrontController  extends BaseController{
 		return "front/index";
 	}
 	
+	/**
+	 * @param pageNum
+	 * @param nid
+	 * @param model
+	 * @param request
+	 * 错误笔记
+	 */
 	@GetMapping("/error")
 	public String error(Integer pageNum, Integer nid, Model model,HttpServletRequest request) {
 		nid = nid == null ? 3 : nid;
