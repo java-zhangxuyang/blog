@@ -81,7 +81,11 @@
 				</div>
 				<%for(con in conList.list){%>
 					<div class="topic clear">
-						<h1><a href="/detailed?id=${con.id}">${con.title}</a>
+						<h1><a href="/detailed?id=${con.id}
+							<%if(likeName!=null){%>
+								&querylikename=${likeName}
+							<%}%>
+						">${con.title}</a>
 <!-- 						<small class="text-danger" style="padding-left:300px;"><span class="glyphicon glyphicon-user"></span>Author:${con.author}</small>
  -->						</h1><br/>
 						<span><span class="glyphicon glyphicon-time"></span>&nbsp;${con.time,'yyyy-MM-dd HH:mm'}</span>

@@ -19,7 +19,9 @@ import com.zhangxy.model.center;
 
 import jodd.datetime.JDateTime;
 import jodd.util.StringUtil;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 public class IndexService {
 	
@@ -196,8 +198,19 @@ public class IndexService {
 		Content con = contentMapper.selectByPrimaryKey(id);
 		return con;
 	}
-	public Content lookAdd(Integer id, String admin) {
-		Content con = this.getContentById(id);
+	public Content lookAdd(Integer id, String admin,String querylikename) {
+		Content con =  new Content();
+		if(null != querylikename && querylikename.length() > 0) {
+			try {
+				con = solrService.querySolrById(id,querylikename);
+			} catch (Exception e) {
+				log.info("solr查询出错！");
+				e.printStackTrace();
+			}
+		}else {
+			con = this.getContentById(id);
+		}
+		
 		if(StringUtil.isBlank(admin)) {
 			con.setLook(con.getLook() + 1);
 			contentMapper.updateByPrimaryKeySelective(con);

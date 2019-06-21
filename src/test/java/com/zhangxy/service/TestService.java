@@ -26,9 +26,11 @@ import jodd.datetime.JDateTime;
 public class TestService {
 
 	@Autowired
-	private SolrService service;
+	private SolrService solrService;
 	@Autowired
 	private ContentService conserService;
+	@Autowired
+	private IndexService indexService;
 	
 	@Test
 	public void test() {
@@ -46,13 +48,9 @@ public class TestService {
 	}
 	@Test
 	public void testSolr() throws Exception {
-		List<Content> conList = service.querySolr("Java");
-		if(conList!=null&&conList.size()>0) {
-			for (Content content : conList) {
-				System.out.println("ID:"+content.getId()+",title:"+content.getTitle());
-			}
-		}else {
-			System.out.println("查无结果！");
+		List<Content> list = indexService.getContentList(1).getList();
+		for (Content content : list) {
+			solrService.addDoc(content);
 		}
 	}
 	@Test

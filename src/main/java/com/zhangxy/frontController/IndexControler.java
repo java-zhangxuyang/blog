@@ -38,6 +38,7 @@ public class IndexControler extends BaseController {
 	public String index(String likeName,String time, Integer nid, Integer tid,Integer pageNum, Model model,HttpServletRequest request) {
 		String ip = IPUtils.getIpAddrByRequest(request);
 		log.info("ip:" + ip + "访问博客");
+		model.addAttribute("likeName", null);
 		if(StringUtil.isNotBlank(likeName)) {
 			PageInfo<Content> contentList = indexService.getSolrContentList(likeName, pageNum);
 			model.addAttribute("conList", contentList);
@@ -45,6 +46,7 @@ public class IndexControler extends BaseController {
 			nav.setId(1);
 			nav.setName(likeName);
 			model.addAttribute("nav", nav);
+			model.addAttribute("likeName", likeName);
 		} else if(tid != null) {
 			Tags tag = indexService.getTagByTid(tid);
 			PageInfo<Content> contentList = indexService.getTagListById(tid, pageNum);
@@ -78,21 +80,21 @@ public class IndexControler extends BaseController {
 	}
 	
 	@GetMapping("/detailed")
-	public String goDetailed(Model model,Integer id,String admin ,HttpServletRequest request) {
+	public String goDetailed(Model model,Integer id,String admin,String querylikename ,HttpServletRequest request) {
 		String ip = IPUtils.getIpAddrByRequest(request);
 		List<Tags> tagList = indexService.getTagList();
 		model.addAttribute("tagList", tagList);
 		List<Navigation> navList = navService.getNavigationList();
 		model.addAttribute("navList", navList);
 		if(StringUtil.isBlank(admin)) {
-			Integer sign = cache.get("look_content_"+id);
+			Integer sign = cache.get("look_content_"+ip);
 			if(sign != null) {
 				admin = "admin";
 			}else {
-				cache.set("look_content_"+id, 1, 10 * 60);
+				cache.set("look_content_"+ip, 1, 10 * 60);
 			}
 		}
-		Content con = indexService.lookAdd(id,admin);
+		Content con = indexService.lookAdd(id,admin,querylikename);
 		model.addAttribute("con", con);
 		List<Map<String, Object>> arrList = consService.selectCountYearMonth();
 		model.addAttribute("arrList", arrList);
