@@ -87,11 +87,11 @@ public class IndexControler extends BaseController {
 		List<Navigation> navList = navService.getNavigationList();
 		model.addAttribute("navList", navList);
 		if(StringUtil.isBlank(admin)) {
-			Integer sign = cache.get("look_content_"+ip);
+			Integer sign = cache.get("look_"+id+"_content_"+ip);
 			if(sign != null) {
 				admin = "admin";
 			}else {
-				cache.set("look_content_"+ip, 1, 10 * 60);
+				cache.set("look_"+id+"_content_"+ip, 1, 10 * 60);
 			}
 		}
 		Content con = indexService.lookAdd(id,admin,querylikename);

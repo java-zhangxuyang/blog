@@ -210,11 +210,14 @@ public class IndexService {
 		}else {
 			con = this.getContentById(id);
 		}
-		
 		if(StringUtil.isBlank(admin)) {
+			Content con1 =  new Content();
+			con1.setId(con.getId());
+			con1.setLook(con.getLook() + 1);
 			con.setLook(con.getLook() + 1);
-			contentMapper.updateByPrimaryKeySelective(con);
+			contentMapper.updateByPrimaryKeySelective(con1);
 		}
+		
 		return con;
 	}
 	
