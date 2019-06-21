@@ -127,6 +127,7 @@ public class FrontController  extends BaseController{
 	@PostMapping("resumeCheck")
 	@ResponseBody
 	public Integer resumeCheck(String pass) {
+		log.info("访问简历，密码：" + pass);
 		if("zhangxy".equals(pass)) {
 			cache.set("resume_pass_check", pass, 10 * 60);
 			return 1;
