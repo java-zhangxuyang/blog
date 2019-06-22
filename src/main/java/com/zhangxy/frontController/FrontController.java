@@ -63,6 +63,7 @@ public class FrontController  extends BaseController{
 		model.addAttribute("navList", navList);
 		List<Map<String, Object>> arrList = consService.selectCountYearMonth();
 		model.addAttribute("arrList", arrList);
+		model.addAttribute("likeName", null);
 		return "front/index";
 	}
 	
@@ -88,6 +89,7 @@ public class FrontController  extends BaseController{
 		model.addAttribute("navList", navList);
 		List<Map<String, Object>> arrList = consService.selectCountYearMonth();
 		model.addAttribute("arrList", arrList);
+		model.addAttribute("likeName", null);
 		return "front/index";
 	}
 	
@@ -106,6 +108,7 @@ public class FrontController  extends BaseController{
 		model.addAttribute("navList", navList);
 		List<Map<String, Object>> arrList = consService.selectCountYearMonth();
 		model.addAttribute("arrList", arrList);
+		model.addAttribute("likeName", null);
 		return "front/index";
 	}
 	
