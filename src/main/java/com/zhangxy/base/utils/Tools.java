@@ -5,11 +5,16 @@ import sun.misc.BASE64Encoder;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
+
+import com.google.common.collect.Lists;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -84,5 +89,28 @@ public class Tools {
         }
 
         return false;
+    }
+    
+    /**
+     * 概率抽奖
+     *
+     * @param rates 各个奖项中奖概率
+     * @return 奖品的索引
+     */
+    public static int lottery(List<Double> rates) {
+        if (rates == null || rates.isEmpty()) {
+            return -1;
+        }
+        List<Double> sortRates = Lists.newArrayList();
+        double sumRate = 0d;
+        for (Double rate : rates) {
+            sumRate += rate;
+            sortRates.add(sumRate);
+        }
+        double rd = Math.random();
+        sortRates.add(rd);
+        Collections.sort(sortRates);
+        int ret = sortRates.indexOf(rd);
+        return ret;
     }
 }
