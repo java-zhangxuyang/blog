@@ -44,11 +44,10 @@
   </div>
   <div class="form-group">
     <label class="col-sm-2 control-label required">作者</label>
-    <div class="col-sm-6">
+    <div class="col-sm-7">
       <input type="text" id ="author"  class="form-control" name="author" value="${con.author!}" placeholder="请输入名字">
     </div>
-    <div class="col-sm-2" style="text-align: center;">
-    	<button type="button" id = "moren" class="btn btn-primary btn"> &nbsp;默认</button>
+    <div class="col-sm-1" style="text-align: center;">
     	<button type="button" id = "qingchu" class="btn btn-primary btn"> &nbsp;清除</button>
     </div>
     <div class="col-sm-2"></div>
@@ -127,6 +126,9 @@
 </form>
 </body>
 <script type="text/javascript">
+$(function(){
+	$("#author").val("Young");
+})
 		var E = window.wangEditor
 		// 或者 var editor = new E( document.getElementById('editor') )
         var editor = new E('#editor')
@@ -153,9 +155,6 @@
         editor.create()
         // 初始化 textarea 的值
         $('#content').val(editor.txt.html())
-        $("#moren").click(function(){
-        	$("#author").val("Young");
-        })
         $("#qingchu").click(function(){
         	$("#author").val("");
         })
