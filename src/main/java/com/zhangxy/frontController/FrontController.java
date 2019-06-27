@@ -22,6 +22,7 @@ import com.zhangxy.model.Navigation;
 import com.zhangxy.model.Tags;
 import com.zhangxy.service.ContentService;
 import com.zhangxy.service.IndexService;
+import com.zhangxy.service.IpNoteService;
 import com.zhangxy.service.MessageService;
 import com.zhangxy.service.NavigationService;
 
@@ -40,6 +41,8 @@ public class FrontController  extends BaseController{
 	private MessageService messService;
 	@Autowired
 	private ContentService consService;
+	@Autowired
+	private IpNoteService noteService;
 	
 	/**
 	 * @param pageNum 分页页数
@@ -52,6 +55,7 @@ public class FrontController  extends BaseController{
 	public String share(Integer pageNum, Integer nid, Model model,HttpServletRequest request) {
 		nid = nid == null ? 2 : nid;
 		String ip = IPUtils.getIpAddrByRequest(request);
+		noteService.handleIpNote(ip);
 		log.info("ip:" + ip + "访问博客分享");
 		PageInfo<Content>  contentList = indexService.getContentListByNid(nid,pageNum);
 		Navigation nav = navService.getNavigationById(nid);
@@ -78,6 +82,7 @@ public class FrontController  extends BaseController{
 	public String error(Integer pageNum, Integer nid, Model model,HttpServletRequest request) {
 		nid = nid == null ? 3 : nid;
 		String ip = IPUtils.getIpAddrByRequest(request);
+		noteService.handleIpNote(ip);
 		log.info("ip:" + ip + "访问博客:错误笔记");
 		PageInfo<Content>  contentList = indexService.getContentListByNid(nid,pageNum);
 		Navigation nav = navService.getNavigationById(nid);
@@ -97,6 +102,7 @@ public class FrontController  extends BaseController{
 	public String note(Integer pageNum, Integer nid, Model model,HttpServletRequest request) {
 		nid = nid == null ? 4 : nid;
 		String ip = IPUtils.getIpAddrByRequest(request);
+		noteService.handleIpNote(ip);
 		log.info("ip:" + ip + "访问博客:错误笔记");
 		PageInfo<Content>  contentList = indexService.getContentListByNid(nid,pageNum);
 		Navigation nav = navService.getNavigationById(nid);
@@ -124,6 +130,7 @@ public class FrontController  extends BaseController{
 		List<Map<String, Object>> arrList = consService.selectCountYearMonth();
 		model.addAttribute("arrList", arrList);
 		String ip = IPUtils.getIpAddrByRequest(request);
+		noteService.handleIpNote(ip);
 		log.info("ip:" + ip + "试图访问简历");
 		return "front/resumeCheck";
 	}
@@ -150,6 +157,7 @@ public class FrontController  extends BaseController{
 			List<Map<String, Object>> arrList = consService.selectCountYearMonth();
 			model.addAttribute("arrList", arrList);
 			String ip = IPUtils.getIpAddrByRequest(request);
+			noteService.handleIpNote(ip);
 			log.info("ip:" + ip + "查看了简历");
 			return "front/resume";
 		}
@@ -176,6 +184,7 @@ public class FrontController  extends BaseController{
 		model.addAttribute("arrList", arrList);
 		String ip = IPUtils.getIpAddrByRequest(request);
 		log.info("ip:" + ip + "访问博客留言");
+		noteService.handleIpNote(ip);
 		model.addAttribute("ip", ip);
 		return "front/message";
 	}

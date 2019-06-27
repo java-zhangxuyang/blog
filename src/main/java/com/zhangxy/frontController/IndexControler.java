@@ -18,6 +18,7 @@ import com.zhangxy.model.Navigation;
 import com.zhangxy.model.Tags;
 import com.zhangxy.service.ContentService;
 import com.zhangxy.service.IndexService;
+import com.zhangxy.service.IpNoteService;
 import com.zhangxy.service.NavigationService;
 
 import jodd.util.StringUtil;
@@ -33,10 +34,13 @@ public class IndexControler extends BaseController {
 	private NavigationService navService;
 	@Autowired
 	private ContentService consService;
+	@Autowired
+	private IpNoteService noteService;
 	
 	@GetMapping({"/","/index"})
 	public String index(String likeName,String time, Integer nid, Integer tid,Integer pageNum, Model model,HttpServletRequest request) {
 		String ip = IPUtils.getIpAddrByRequest(request);
+		noteService.handleIpNote(ip);
 		log.info("ip:" + ip + "访问博客");
 		model.addAttribute("likeName", null);
 		if(StringUtil.isNotBlank(likeName)) {
@@ -82,6 +86,7 @@ public class IndexControler extends BaseController {
 	@GetMapping("/detailed")
 	public String goDetailed(Model model,Integer id,String admin,String querylikename ,HttpServletRequest request) {
 		String ip = IPUtils.getIpAddrByRequest(request);
+		noteService.handleIpNote(ip);
 		List<Tags> tagList = indexService.getTagList();
 		model.addAttribute("tagList", tagList);
 		List<Navigation> navList = navService.getNavigationList();
