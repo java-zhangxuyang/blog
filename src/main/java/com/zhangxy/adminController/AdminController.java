@@ -3,6 +3,7 @@ package com.zhangxy.adminController;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -78,6 +79,8 @@ public class AdminController {
 		model.addAttribute("conList", contentList);
 		List<Integer> list = conService.selectCountMonth();
 		model.addAttribute("data", list);
+		Map<String, Object> dateMap = conService.selectIpCountWeek();
+		model.addAttribute("dateMap", dateMap);
 		List<Message> messlist = messService.getMessageListPage9();
 		model.addAttribute("mess", messlist);
 		return "/admin/iframe/welcome";

@@ -61,14 +61,15 @@
 			<div id="zxt"></div>
 		</div>
 		<div class="bottom">
-			<h3 style="padding:8px 5px 0px 0px;">最新留言</h3>
-			<ul class="nav nav-pills nav-stacked">
+			<h3 style="padding:8px 5px 0px 0px;">本周访问量</h3>
+			<div id="fwl"></div>
+			<!-- <ul class="nav nav-pills nav-stacked">
 				<%for(me in mess){%>
 					<li>
 						<div style="width: 90%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">${meLP.index + "、" + me.massage}</div>
 					</li>
 				<%}%>
-			</ul>
+			</ul> -->
 		</div>
 	</div>
 </body>
@@ -174,5 +175,25 @@ option = {
 	};
 
 myChart.setOption(option);
+
+var dateTimeList = ${dateMap.datelist}
+console.info(dateTimeList)
+var countList = ${dateMap.count}
+var myChart1 = echarts.init(document.getElementById("fwl"));
+option1 = {
+	    xAxis: {
+	        type: 'category',
+	        data: ${dateMap.datelist}
+	    },
+	    yAxis: {
+	        type: 'value'
+	    },
+	    series: [{
+	        data: countList,
+	        type: 'line'
+	    }]
+	};
+
+myChart1.setOption(option1);
 </script>
 </html>

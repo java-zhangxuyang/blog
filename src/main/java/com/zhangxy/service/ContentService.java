@@ -1,7 +1,9 @@
 package com.zhangxy.service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +20,8 @@ import com.zhangxy.model.ContentExample;
 import com.zhangxy.model.Navigation;
 import com.zhangxy.model.Tags;
 import com.zhangxy.model.center;
+
+import jodd.datetime.JDateTime;
 
 @Service
 public class ContentService {
@@ -119,6 +123,23 @@ public class ContentService {
 		PageHelper.startPage(1, 12);
 		PageInfo<Map<String, Object>> pageInfo = new PageInfo<>(list);
 		return pageInfo.getList();
+	}
+	
+	public Map<String, Object> selectIpCountWeek(){
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<String> datelist = cenmMapper.selectWeekDate();
+		StringBuffer dateJson = new StringBuffer();
+		dateJson.append("['");
+		for (String date : datelist) {
+			dateJson.append(date+"','") ;
+		}
+		dateJson.deleteCharAt(dateJson.length() - 1);
+		dateJson.deleteCharAt(dateJson.length() - 1);
+		dateJson.append("]");
+		List<Integer> countlist = cenmMapper.selectCountWeekDate();
+		map.put("datelist", dateJson);
+		map.put("count", countlist);
+		return map;
 	}
 	
 	public List<Content> getConListAll() {
