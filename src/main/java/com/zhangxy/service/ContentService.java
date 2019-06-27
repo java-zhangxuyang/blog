@@ -10,6 +10,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zhangxy.mapper.CenterMapper;
@@ -128,16 +129,15 @@ public class ContentService {
 	public Map<String, Object> selectIpCountWeek(){
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<String> datelist = cenmMapper.selectWeekDate();
-		StringBuffer dateJson = new StringBuffer();
-		dateJson.append("['");
-		for (String date : datelist) {
-			dateJson.append(date+"','") ;
-		}
-		dateJson.deleteCharAt(dateJson.length() - 1);
-		dateJson.deleteCharAt(dateJson.length() - 1);
-		dateJson.append("]");
+		/*
+		 * StringBuffer dateJson = new StringBuffer(); dateJson.append("['"); for
+		 * (String date : datelist) { dateJson.append(date+"','") ; }
+		 * dateJson.deleteCharAt(dateJson.length() - 1);
+		 * dateJson.deleteCharAt(dateJson.length() - 1); dateJson.append("]");
+		 */
+		String jsonDatelist = JSON.toJSONString(datelist);
 		List<Integer> countlist = cenmMapper.selectCountWeekDate();
-		map.put("datelist", dateJson);
+		map.put("datelist", jsonDatelist);
 		map.put("count", countlist);
 		return map;
 	}
