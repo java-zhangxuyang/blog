@@ -20,7 +20,7 @@ public class IpNoteService {
 	
 	@Async
 	public void handleIpNote(String ip) {
-		if("0:0:0:0:0:0:0:1".equals(ip)) {
+		if("0:0:0:0:0:0:0:1".equals(ip) || ip.length() > 15) {
 			return;
 		}else {
 			IpNote note = this.getCountByIp(ip);
