@@ -25,6 +25,6 @@ public interface IpNoteMapper {
 
     int updateByPrimaryKey(IpNote record);
     
-    @Select("select * from ipnote where date(regdate) = curdate() and ip = #{ip}")
+    @Select("select * from ipnote where date(time) = curdate() and ip = #{ip}")
     public IpNote getCountByIp(String ip);
 }
