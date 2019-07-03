@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageInfo;
+import com.zhangxy.base.constant.WebConst;
 import com.zhangxy.base.controler.BaseController;
 import com.zhangxy.base.utils.IPUtils;
 import com.zhangxy.model.Content;
@@ -52,13 +53,12 @@ public class FrontController  extends BaseController{
 	 * 分享页面
 	 */
 	@GetMapping("/share")
-	public String share(Integer pageNum, Integer nid, Model model,HttpServletRequest request) {
-		nid = nid == null ? 2 : nid;
+	public String share(Integer pageNum, Model model,HttpServletRequest request) {
 		String ip = IPUtils.getIpAddrByRequest(request);
 		noteService.handleIpNote(ip);
 		log.info("ip:" + ip + "访问博客分享");
-		PageInfo<Content>  contentList = indexService.getContentListByNid(nid,pageNum);
-		Navigation nav = navService.getNavigationById(nid);
+		PageInfo<Content>  contentList = indexService.getContentListByNid(WebConst.SHARE,pageNum);
+		Navigation nav = navService.getNavigationById(WebConst.SHARE);
 		model.addAttribute("nav", nav);
 		model.addAttribute("conList", contentList);
 		List<Tags> tagList = indexService.getTagList();
@@ -79,13 +79,12 @@ public class FrontController  extends BaseController{
 	 * 错误笔记
 	 */
 	@GetMapping("/error")
-	public String error(Integer pageNum, Integer nid, Model model,HttpServletRequest request) {
-		nid = nid == null ? 3 : nid;
+	public String error(Integer pageNum, Model model,HttpServletRequest request) {
 		String ip = IPUtils.getIpAddrByRequest(request);
 		noteService.handleIpNote(ip);
 		log.info("ip:" + ip + "访问博客:错误笔记");
-		PageInfo<Content>  contentList = indexService.getContentListByNid(nid,pageNum);
-		Navigation nav = navService.getNavigationById(nid);
+		PageInfo<Content>  contentList = indexService.getContentListByNid(WebConst.ERROR,pageNum);
+		Navigation nav = navService.getNavigationById(WebConst.ERROR);
 		model.addAttribute("nav", nav);
 		model.addAttribute("conList", contentList);
 		List<Tags> tagList = indexService.getTagList();
@@ -99,13 +98,12 @@ public class FrontController  extends BaseController{
 	}
 	
 	@GetMapping("/note")
-	public String note(Integer pageNum, Integer nid, Model model,HttpServletRequest request) {
-		nid = nid == null ? 4 : nid;
+	public String note(Integer pageNum, Model model,HttpServletRequest request) {
 		String ip = IPUtils.getIpAddrByRequest(request);
 		noteService.handleIpNote(ip);
 		log.info("ip:" + ip + "访问博客:错误笔记");
-		PageInfo<Content>  contentList = indexService.getContentListByNid(nid,pageNum);
-		Navigation nav = navService.getNavigationById(nid);
+		PageInfo<Content>  contentList = indexService.getContentListByNid(WebConst.NOTE,pageNum);
+		Navigation nav = navService.getNavigationById(WebConst.NOTE);
 		model.addAttribute("nav", nav);
 		model.addAttribute("conList", contentList);
 		List<Tags> tagList = indexService.getTagList();
@@ -119,9 +117,8 @@ public class FrontController  extends BaseController{
 	}
 	
 	@GetMapping("/resume")
-	public String resume(Integer pageNum, Integer nid, Model model,HttpServletRequest request) {
-		nid = nid == null ? 5 : nid;
-		Navigation nav = navService.getNavigationById(nid);
+	public String resume(Integer pageNum, Model model,HttpServletRequest request) {
+		Navigation nav = navService.getNavigationById(WebConst.RESUME);
 		model.addAttribute("nav", nav);
 		List<Tags> tagList = indexService.getTagList();
 		model.addAttribute("tagList", tagList);
@@ -152,7 +149,7 @@ public class FrontController  extends BaseController{
 			model.addAttribute("tagList", tagList);
 			List<Navigation> navList = navService.getNavigationList();
 			model.addAttribute("navList", navList);
-			Navigation nav = navService.getNavigationById(5);
+			Navigation nav = navService.getNavigationById(WebConst.RESUME);
 			model.addAttribute("nav", nav);
 			List<Map<String, Object>> arrList = consService.selectCountYearMonth();
 			model.addAttribute("arrList", arrList);
@@ -170,13 +167,12 @@ public class FrontController  extends BaseController{
 	}
 	
 	@GetMapping("/message")
-	public String message(Integer pageNum, Integer nid, Model model,HttpServletRequest request) {
+	public String message(Integer pageNum, Model model,HttpServletRequest request) {
 		List<Tags> tagList = indexService.getTagList();
 		model.addAttribute("tagList", tagList);
 		List<Navigation> navList = navService.getNavigationList();
 		model.addAttribute("navList", navList);
-		nid = nid == null ? 6 : nid;
-		Navigation nav = navService.getNavigationById(nid);
+		Navigation nav = navService.getNavigationById(WebConst.MESSAGE);
 		model.addAttribute("nav", nav);
 		PageInfo<Message> pageInfo = messService.getMessageListPage(pageNum);
 		model.addAttribute("mess", pageInfo);

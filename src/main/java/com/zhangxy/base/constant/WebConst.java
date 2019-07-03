@@ -15,6 +15,13 @@ public class WebConst {
     public static String LOGIN_SESSION_USER = "user";
 
     public static final String USER_IN_COOKIE = "S_L_ID";
+    
+    public static final Integer INDEX = 1;
+    public static final Integer SHARE = 2;
+    public static final Integer ERROR = 3;
+    public static final Integer NOTE = 4;
+    public static final Integer RESUME = 5;
+    public static final Integer MESSAGE = 6;
 
     /**
          * 管理帐号

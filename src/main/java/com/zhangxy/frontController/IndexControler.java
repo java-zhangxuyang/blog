@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.github.pagehelper.PageInfo;
+import com.zhangxy.base.constant.WebConst;
 import com.zhangxy.base.controler.BaseController;
 import com.zhangxy.base.utils.IPUtils;
 import com.zhangxy.model.Content;
@@ -38,7 +39,7 @@ public class IndexControler extends BaseController {
 	private IpNoteService noteService;
 	
 	@GetMapping({"/","/index"})
-	public String index(String likeName,String time, Integer nid, Integer tid,Integer pageNum, Model model,HttpServletRequest request) {
+	public String index(String likeName,String time, Integer tid,Integer pageNum, Model model,HttpServletRequest request) {
 		String ip = IPUtils.getIpAddrByRequest(request);
 		noteService.handleIpNote(ip);
 		log.info("ip:" + ip + "访问博客");
@@ -67,9 +68,8 @@ public class IndexControler extends BaseController {
 			model.addAttribute("nav", nav);
 			model.addAttribute("conList", contentList);
 		} else {
-			nid = nid == null? 1 : nid;
 			PageInfo<Content>  contentList = indexService.getContentList(pageNum);
-			Navigation nav = navService.getNavigationById(nid);
+			Navigation nav = navService.getNavigationById(WebConst.INDEX);
 			nav.setName("最新文章");
 			model.addAttribute("nav", nav);
 			model.addAttribute("conList", contentList);
