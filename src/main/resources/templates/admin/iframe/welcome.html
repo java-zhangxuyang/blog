@@ -16,7 +16,7 @@
 			<ul class="nav nav-pills nav-stacked">
 				<%for(con in conList){%>
 					<li>
-						<a href="/detailed?id=${con.id}" style="padding: 5px 3px 3px 8px;">
+						<a href="/detailed?id=${con.id}&admin=admin" style="padding: 5px 3px 3px 8px;">
 							<span class="badge pull-right">${con.look}</span>
 							<div style="width: 90%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">${conLP.index + "、" + con.title}</div>
 						</a>
