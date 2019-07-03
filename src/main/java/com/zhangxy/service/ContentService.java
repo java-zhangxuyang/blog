@@ -96,6 +96,9 @@ public class ContentService {
 			cenmMapper.deleteTagByCid(con.getId());
 			for (Integer tid : con.getTidList()) {
 				cenmMapper.insertTag(con.getId(), tid);
+				Tags tag = tagService.getTagsById(tid);
+				tag.setCount(tag.getCount() + 1);
+				tagService.updateTag(tag);
 			}
 		}
 		return i;
