@@ -57,7 +57,7 @@ public class IndexControler extends BaseController {
 			model.addAttribute("conList", contentList);
 			Navigation nav = new Navigation();
 			nav.setId(1);
-			nav.setName(tag.getName());
+			nav.setName(null == tag ? "" : tag.getName());
 			model.addAttribute("nav", nav);
 		} else if(StringUtil.isNotBlank(time)){
 			PageInfo<Content>  contentList = indexService.getContentListBytime(pageNum,time);

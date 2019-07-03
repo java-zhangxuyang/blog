@@ -23,7 +23,7 @@
 			<div class = "navig col-md-7">
 				<ul class="nav nav-tabs nav-justified">
 				  <%for(navl in navList){%>
-				  	<%if(navl.id == nav.id){%>
+				  	<%if(navl.id == nav.id!1){%>
 					  <li class="active"><a href="${navl.url}">${navl.name}</a></li>
 				  	<%}else{%>
 					  <li><a href="${navl.url}">${navl.name}</a></li>
@@ -77,7 +77,7 @@
 					</a>
 				</div>
 				<div>
-					<h2>${nav.name}</h2>
+					<h2>${nav.name!""}</h2>
 				</div>
 				<%for(con in conList.list){%>
 					<div class="topic clear">
@@ -99,17 +99,17 @@
 				<div class="fenye">
 					<ul class="pagination">
 						<%if(conList.isHasPreviousPage){%>
-						    <li><a href="${nav.url}&pageNum=${conList.prePage}">&laquo;</a></li>
+						    <li><a href="${nav.url!}?pageNum=${conList.prePage}">&laquo;</a></li>
 						<%}%>
 						<%for(var i = 1;i<=conList.pages;i++){%>
 						    <li 
 						    	<%if(i == conList.pageNum){%>
 						    		class="active"
 								<%}%>
-						    ><a href="${nav.url}&pageNum=${i}">${i}</a></li>
+						    ><a href="${nav.url!}?pageNum=${i}">${i}</a></li>
 						<%}%>
 						<%if(conList.isHasNextPage){%>
-						    <li><a href="${nav.url}&pageNum=${conList.nextPage}">&raquo;</a></li>
+						    <li><a href="${nav.url!}?pageNum=${conList.nextPage}">&raquo;</a></li>
 						<%}%>
 					</ul>
 				</div>

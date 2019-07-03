@@ -22,7 +22,7 @@
 			<div class = "navig col-md-7">
 				<ul class="nav nav-tabs nav-justified">
 				  <%for(navl in navList){%>
-				  	<%if(navl.id == nav.id){%>
+				  	<%if(navl.id == nav.id!5){%>
 					  <li class="active"><a href="${navl.url}">${navl.name}</a></li>
 				  	<%}else{%>
 					  <li><a href="${navl.url}">${navl.name}</a></li>

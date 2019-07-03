@@ -70,7 +70,7 @@
 			<div class = "navig col-md-7">
 				<ul class="nav nav-tabs nav-justified">
 				  <%for(navl in navList){%>
-				  	<%if(navl.id == nav.id){%>
+				  	<%if(navl.id == nav.id!6){%>
 					  <li class="active"><a href="${navl.url}">${navl.name}</a></li>
 				  	<%}else{%>
 					  <li><a href="${navl.url}">${navl.name}</a></li>
@@ -159,7 +159,7 @@
 				<div class="fenye">
 					<ul class="pagination">
 						<%if(mess.isHasPreviousPage){%>
-						    <li><a href="${nav.url}&pageNum=${mess.prePage}">&laquo;</a></li>
+						    <li><a href="${nav.url!}?pageNum=${mess.prePage}">&laquo;</a></li>
 						<%}%>
 						<% 
 						for(var i = 1;i<=mess.pages;i++){%>
@@ -167,10 +167,10 @@
 						    	<%if(i == mess.pageNum){%>
 						    		class="active"
 								<%}%>
-						    ><a href="${nav.url}&pageNum=${i}">${i}</a></li>
+						    ><a href="${nav.url!}?pageNum=${i}">${i}</a></li>
 						<%}%>
 						<%if(mess.isHasNextPage){%>
-						    <li><a href="${nav.url}&pageNum=${mess.nextPage}">&raquo;</a></li>
+						    <li><a href="${nav.url!}?pageNum=${mess.nextPage}">&raquo;</a></li>
 						<%}%>
 					</ul>
 				</div>

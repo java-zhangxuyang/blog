@@ -210,7 +210,7 @@ public class IndexService {
 		}else {
 			con = this.getContentById(id);
 		}
-		if(StringUtil.isBlank(admin)) {
+		if(StringUtil.isBlank(admin) && null != con) {
 			Content con1 =  new Content();
 			con1.setId(con.getId());
 			con1.setLook(con.getLook() + 1);
