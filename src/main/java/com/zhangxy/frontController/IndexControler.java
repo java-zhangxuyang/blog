@@ -103,7 +103,7 @@ public class IndexControler extends BaseController {
 		model.addAttribute("con", con);
 		List<Map<String, Object>> arrList = consService.selectCountYearMonth();
 		model.addAttribute("arrList", arrList);
-		log.info("ip:" + ip + "查看了"+con.getTitle());
+		log.info("ip:" + ip + "查看了"+con==null?"":con.getTitle());
 		return "front/content";
 	}
 
