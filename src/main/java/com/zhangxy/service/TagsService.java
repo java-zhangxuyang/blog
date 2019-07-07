@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.zhangxy.base.utils.BlogUtils;
 import com.zhangxy.mapper.TagsMapper;
 import com.zhangxy.model.Tags;
 import com.zhangxy.model.TagsExample;
@@ -24,7 +25,7 @@ public class TagsService {
 		return list;
 	}
 	public PageInfo<Tags> getTagsListByPage(Integer pageNum) {
-		pageNum = pageNum == null ? 1 : pageNum;
+		pageNum = BlogUtils.page(pageNum, false);
 		PageHelper.startPage(pageNum, 10);
 		TagsExample example = new TagsExample();
 		example.setOrderByClause(" count desc");

@@ -308,6 +308,27 @@ public class BlogUtils {
             e.printStackTrace();
         }
     }
+    /**
+         * 分页参数校验修正
+     *
+     * @param response
+     * @param uid
+     */
+    public static Integer page(Integer pageNum, Boolean page3) {
+    	if(pageNum == null || pageNum < 1) {
+    		return 1;
+    	} else {
+    		if(page3) {
+    			if(pageNum > 3) {
+    				return 3;
+    			}else {
+    				return pageNum;
+    			}
+    		}else {
+    			return pageNum;
+    		}
+    	}
+    }
 
     /**
      * 获取RSS输出

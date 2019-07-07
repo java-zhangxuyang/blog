@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.zhangxy.base.utils.BlogUtils;
 import com.zhangxy.mapper.CenterMapper;
 import com.zhangxy.mapper.ContentMapper;
 import com.zhangxy.mapper.NavigationMapper;
@@ -52,7 +53,7 @@ public class ContentService {
 	 * @return 后端获取文章列表 分页
 	 */
 	public PageInfo<Content> getConHotListByPage(Integer pageNum) {
-		pageNum = pageNum == null ? 1 : pageNum;
+		pageNum = BlogUtils.page(pageNum, false);
 		PageHelper.startPage(pageNum, 10);
 		ContentExample example = new ContentExample();
 		example.setOrderByClause("time desc");

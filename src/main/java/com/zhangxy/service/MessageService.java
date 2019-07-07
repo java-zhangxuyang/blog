@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.zhangxy.base.utils.BlogUtils;
 import com.zhangxy.mapper.MessageMapper;
 import com.zhangxy.model.Message;
 import com.zhangxy.model.MessageExample;
@@ -19,7 +20,7 @@ public class MessageService {
 	private MessageMapper messMapper;
 	
 	public PageInfo<Message> getMessageListPage(Integer pageNum){
-		pageNum = pageNum == null ? 1 : pageNum;
+		pageNum = BlogUtils.page(pageNum, false);
 		PageHelper.startPage(pageNum, 6);
 		List<Message> list = messMapper.selectByExample(new MessageExample());
 		PageInfo<Message> pageInfo = new PageInfo<>(list);
@@ -32,7 +33,7 @@ public class MessageService {
 		return pageInfo.getList();
 	}
 	public PageInfo<Message> getMessageListPage10(Integer pageNum){
-		pageNum = pageNum == null ? 1 : pageNum;
+		pageNum = BlogUtils.page(pageNum, false);
 		PageHelper.startPage(pageNum, 10);
 		List<Message> list = messMapper.selectByExample(new MessageExample());
 		PageInfo<Message> pageInfo = new PageInfo<>(list);

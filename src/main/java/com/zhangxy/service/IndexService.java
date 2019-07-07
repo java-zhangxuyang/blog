@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.zhangxy.base.utils.BlogUtils;
 import com.zhangxy.mapper.CenterMapper;
 import com.zhangxy.mapper.ContentMapper;
 import com.zhangxy.mapper.TagsMapper;
@@ -41,7 +42,7 @@ public class IndexService {
 	 * @return
 	 */
 	public PageInfo<Content> getContentListByNid(Integer nid, Integer pageNum){
-		pageNum = pageNum == null ? 1 :pageNum;
+		pageNum = BlogUtils.page(pageNum, false);
 		PageHelper.startPage(pageNum, 10);
 		ContentExample example = new ContentExample();
 		example.setOrderByClause(" top desc, time desc");
@@ -65,11 +66,20 @@ public class IndexService {
 		return pageInfo;
 	}
 	public PageInfo<Content> getContentList(Integer pageNum){
-		pageNum = pageNum == null ? 1 :pageNum;
+		pageNum = BlogUtils.page(pageNum, true);
 		PageHelper.startPage(pageNum, 10);
 		ContentExample example = new ContentExample();
 		example.setOrderByClause(" top desc, time desc");
 		List<Content> list = contentMapper.selectByExample(example);
+		if(list != null && list.size() > 30) {
+			List<Content> newlist = new ArrayList<>();
+			for(int i = 0; i < list.size(); i++){
+				if(i >= 30) {
+					newlist.add(list.get(i));
+				}
+			}
+			list.removeAll(newlist);
+		}
 		PageInfo<Content> pageInfo = new PageInfo<>(list);
 		List<Content> resule = pageInfo.getList();
 		for (Content content : resule) {
@@ -88,7 +98,7 @@ public class IndexService {
 		return pageInfo;
 	}
 	public PageInfo<Content> getContentListBytime(Integer pageNum,String time){
-		pageNum = pageNum == null ? 1 :pageNum;
+		pageNum = BlogUtils.page(pageNum, false);
 		PageHelper.startPage(pageNum, 10);
 		JDateTime date = new JDateTime(time);
 		List<Content> list = centerMapper.ContentListBytime(date.getYear(),date.getMonth());
@@ -116,7 +126,7 @@ public class IndexService {
 	 * @return
 	 */
 	public PageInfo<Content> getContentLikeName(String likeName, Integer pageNum){
-		pageNum = pageNum == null ? 1 :pageNum;
+		pageNum = BlogUtils.page(pageNum, false);
 		PageHelper.startPage(pageNum, 10);
 		ContentExample example = new ContentExample();
 		example.setOrderByClause(" top desc, time desc");
@@ -154,7 +164,7 @@ public class IndexService {
 	}
 	
 	public PageInfo<Content> getTagListById(Integer tid,Integer pageNum){
-		pageNum = pageNum == null ? 1 :pageNum;
+		pageNum = BlogUtils.page(pageNum, false);
 		List<center> cenList = centerMapper.getTagListByTid(tid);
 		List<Integer> cidList = this.getCidByCenList(cenList);
 		PageHelper.startPage(pageNum, 10);
@@ -222,7 +232,7 @@ public class IndexService {
 	}
 	
 	public PageInfo<Content> getSolrContentList(String likeName,Integer pageNum){
-		pageNum = pageNum == null ? 1 :pageNum;
+		pageNum = BlogUtils.page(pageNum, false);
 		PageHelper.startPage(pageNum, 10);
 		List<Content> conList=new ArrayList<Content>();
 		try {
