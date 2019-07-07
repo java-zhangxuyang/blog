@@ -39,13 +39,13 @@ public interface CenterMapper {
 	@Select("SELECT * FROM content WHERE YEAR(time)=#{year} AND MONTH(time)=#{month}")
 	List<Content> ContentListBytime(int year, int month);
 	
-	@Select("select DATE_FORMAT(ADDDATE(subdate(curdate(),date_format(curdate(),'%w')-1), INTERVAL help_topic_id DAY),'%Y-%m-%d')\n" + 
+	@Select("select DATE_FORMAT(ADDDATE(subdate(curdate(),date_format(curdate(),'%w')), INTERVAL help_topic_id DAY),'%Y-%m-%d')\n" + 
 			"day from mysql.help_topic where help_topic_id <7 ORDER BY day")
 	List<String> selectWeekDate();
 	
 	@Select("select sum(case when a.day=date_format(b.time,'%Y-%m-%d') then 1 else 0 end) cnt\n" + 
 			"from\n" + 
-			"(select DATE(ADDDATE(subdate(curdate(),date_format(curdate(),'%w')-1), INTERVAL help_topic_id DAY)) \n" + 
+			"(select DATE(ADDDATE(subdate(curdate(),date_format(curdate(),'%w')), INTERVAL help_topic_id DAY)) \n" + 
 			"day from mysql.help_topic where help_topic_id <7) a\n" + 
 			"left join ipnote b on a.day=date_format(b.time,'%Y-%m-%d')\n" + 
 			"group by a.day")
