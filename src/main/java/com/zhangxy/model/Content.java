@@ -1,13 +1,19 @@
 package com.zhangxy.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 import lombok.Data;
 
 @Data
-public class Content {
-    private Integer id;
+public class Content implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Integer id;
 
     private String title;
 
