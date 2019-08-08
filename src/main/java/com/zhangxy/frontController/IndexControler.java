@@ -101,9 +101,9 @@ public class IndexControler extends BaseController {
 		}
 		Content con = indexService.lookAdd(id,admin,querylikename);
 		model.addAttribute("con", con);
+		System.out.println("ip:" + ip + "查看了"+con==null?"":con.getTitle());
 		List<Map<String, Object>> arrList = consService.selectCountYearMonth();
 		model.addAttribute("arrList", arrList);
-		log.info("ip:" + ip + "查看了"+con==null?"":con.getTitle());
 		return "front/content";
 	}
 
