@@ -38,13 +38,12 @@ public class BlogApplication {
 	     * 文件上传时自定义临时路径
 	     * @return
      */
-    @Bean
-    MultipartConfigElement multipartConfigElement() {
-        MultipartConfigFactory factory = new MultipartConfigFactory();
-        //2.该处就是指定的路径(需要提前创建好目录，否则上传时会抛出异常)
-        factory.setLocation("/data/uploadtmp");
-        return factory.createMultipartConfig();
-    }
+	/*
+	 * @Bean MultipartConfigElement multipartConfigElement() {
+	 * MultipartConfigFactory factory = new MultipartConfigFactory();
+	 * //2.该处就是指定的路径(需要提前创建好目录，否则上传时会抛出异常) factory.setLocation("/data/uploadtmp");
+	 * return factory.createMultipartConfig(); }
+	 */
 	
 	protected void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX + "/static/");
