@@ -2,6 +2,7 @@ package com.zhangxy.adminController;
 
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -126,6 +127,7 @@ public class AdminController {
 			solrService.deleteDocumentById(con.getId());
 			solrService.addDoc(con);
 		}else {
+			con.setTime(new Date());
 			conService.addCom(con);
 			solrService.addDoc(con);
 		}

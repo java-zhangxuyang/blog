@@ -44,7 +44,7 @@ public class SolrService {
 	    SolrInputDocument document = new SolrInputDocument();
 	    document.addField("id", con.getId());
 	    document.addField("title", con.getTitle());
-	    document.addField("time", con.getTime());
+	    document.addField("time", null==con.getTime()?new Date():con.getTime());
 	    document.addField("content", con.getContent());
 	    document.addField("author", con.getAuthor());
 	    document.addField("top", con.getTop());
@@ -174,7 +174,7 @@ public class SolrService {
 		//下面设置solr查询参数
 		
 		//query.set("q", "*:*");// 参数q  查询所有 
-		query.setQuery("id:" + id +" AND title:"+likeName+" OR content:"+likeName);
+		query.setQuery("id:" + id +" AND (title:"+likeName+" OR content:"+likeName+")");
 		/*fq :
 		 * （filter query）过虑查询，作用：在q查询符合结果中同时是fq查询符合的，
 		 */

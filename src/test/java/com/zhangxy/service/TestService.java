@@ -54,6 +54,10 @@ public class TestService {
 		}
 	}
 	@Test
+	public void testSolrDelete() throws Exception {
+			solrService.deleteDocumentById(44);
+	}
+	@Test
 	public void testFTP() {
 		FTPClient ftp = new FTPClient();
 		try {

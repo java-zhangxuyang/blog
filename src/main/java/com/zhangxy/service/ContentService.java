@@ -106,7 +106,6 @@ public class ContentService {
 	}
 
 	public Integer addCom(Content con) {
-		con.setTime(new Date());
 		int i = conMapper.insertSelective(con);
 		if(i > 0 && con.getTidList() != null && con.getTidList().size() > 0) {
 			for (Integer tid : con.getTidList()) {
