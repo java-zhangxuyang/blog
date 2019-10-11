@@ -7,7 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class IloveyouController {
 
 	@GetMapping("/hxp")
-	public String render404() {
+	public String hxp() {
         return "hxp/index";
     }
+	
+	@GetMapping("/ltq")
+	public String ltq() {
+		return "ltq/index";
+	}
 }
