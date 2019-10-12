@@ -122,12 +122,12 @@ public class AdminController {
 	 */
 	@PostMapping("/editOrAddCom")
 	public String editOrAddCom(Content con) throws SolrServerException, IOException {
+		con.setTime(new Date());
 		if(null != con.getId()) {
 			conService.updateCom(con);
 			solrService.deleteDocumentById(con.getId());
 			solrService.addDoc(con);
 		}else {
-			con.setTime(new Date());
 			conService.addCom(con);
 			solrService.addDoc(con);
 		}
