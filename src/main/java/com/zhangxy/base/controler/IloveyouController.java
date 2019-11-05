@@ -19,4 +19,9 @@ public class IloveyouController {
 	public String wxy() {
 		return "wxy/index";
 	}
+	
+	@GetMapping("/xjr")
+	public String xjr() {
+		return "xjr/index";
+	}
 }
