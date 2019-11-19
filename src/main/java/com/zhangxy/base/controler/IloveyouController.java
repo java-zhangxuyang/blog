@@ -20,8 +20,7 @@ public class IloveyouController {
 		return "wxy/index";
 	}
 	
-	@GetMapping("/xjr")
-	public String xjr() {
-		return "xjr/index";
-	}
+	/*
+	 * @GetMapping("/xjr") public String xjr() { return "xjr/index"; }
+	 */
 }
