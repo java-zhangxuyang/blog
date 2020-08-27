@@ -1,5 +1,5 @@
 server:
-  port: 80
+  port: 8080
 
 spring:
    mvc:
@@ -17,7 +17,7 @@ spring:
    datasource:          #数据源
      url: jdbc:mysql://www.youngzhang.cn:3306/blog?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=UTF-8
      username: root
-     password: devroot
+     password: qq994134665
      driver-class-name: com.mysql.cj.jdbc.Driver
      type: com.alibaba.druid.pool.DruidDataSource
      dbcp2:
@@ -55,7 +55,7 @@ pagehelper:
 FTP.ADDRESS: www.youngzhang.cn
 FTP.PORT: 21
 FTP.USERNAME: ftpuser
-FTP.PASSWORD: devroot
+FTP.PASSWORD: qq994134665
 FTP.BASEPATH: /home/www/image
 #图片服务器相关配置
 IMAGE.BASE.URL: http://www.youngzhang.cn:8999/image
