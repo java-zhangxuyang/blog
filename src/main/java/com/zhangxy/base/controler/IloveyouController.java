@@ -20,6 +20,11 @@ public class IloveyouController {
 		return "wxy/index";
 	}
 	
+	@GetMapping("/love")
+	public String love() {
+		return "love/index";
+	}
+	
 	/*
 	 * @GetMapping("/xjr") public String xjr() { return "xjr/index"; }
 	 */
