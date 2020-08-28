@@ -30,7 +30,7 @@ public class WebConst {
     /**
      * md5加密密码
      */
-    public static String PWD_SALT = "1ce2999376f970a1a1585de045345c8e";
+    public static String PWD_SALT = "ec350a3713ae2266e91c2c3aa141e129";//zhangxy
 
     /**
      * 最大获取文章条数
